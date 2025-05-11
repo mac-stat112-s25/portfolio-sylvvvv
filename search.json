@@ -12,56 +12,56 @@
   {
     "objectID": "bw/bw-uni.html",
     "href": "bw/bw-uni.html",
-    "title": "\n2  Univariate Viz\n",
+    "title": "\n3  Univariate Viz\n",
     "section": "",
     "text": "Use this file to generate a professional looking univariate visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.\n\nlibrary(ggplot2)\n\n# Import data\nhikes &lt;- read.csv(\"https://mac-stat.github.io/data/high_peaks.csv\")\n\n# from uni excercise\nggplot(hikes, aes(x = rating)) +\n  geom_bar(color = \"orange\", fill = \"blue\")  +\n  labs(x = \"Rating\", y = \"Number of hikes\") + \n  theme_minimal()",
     "crumbs": [
       "Best Work",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Univariate Viz</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Univariate Viz</span>"
     ]
   },
   {
     "objectID": "bw/bw-bi.html",
     "href": "bw/bw-bi.html",
-    "title": "3  Bivariate Viz",
+    "title": "4  Bivariate Viz",
     "section": "",
     "text": "Use this file to generate a professional looking bivariate visualization. The visualization will not perfect the first time but you are expected to improve it throughout the semester especially after covering advanced topics such as effective viz.",
     "crumbs": [
       "Best Work",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Bivariate Viz</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Bivariate Viz</span>"
     ]
   },
   {
     "objectID": "bw/bw-tri.html",
     "href": "bw/bw-tri.html",
-    "title": "\n4  Trivariate Viz\n",
+    "title": "\n5  Trivariate Viz\n",
     "section": "",
     "text": "Use this file to generate a professional looking trivariate visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.\n\nlibrary(ggplot2)\n\n# Import and check out data\neducation &lt;- read.csv(\"https://mac-stat.github.io/data/sat.csv\")\nhead(education)\n\n       State expend ratio salary frac verbal math  sat  fracCat\n1    Alabama  4.405  17.2 31.144    8    491  538 1029   (0,15]\n2     Alaska  8.963  17.6 47.951   47    445  489  934 (45,100]\n3    Arizona  4.778  19.3 32.175   27    448  496  944  (15,45]\n4   Arkansas  4.459  17.1 28.934    6    482  523 1005   (0,15]\n5 California  4.992  24.0 41.078   45    417  485  902  (15,45]\n6   Colorado  5.443  18.4 34.571   29    462  518  980  (15,45]\n\n#from exercise muiltivariate\nggplot(education, aes(x=salary, y=sat, color=expend)) +\n  geom_point() +\n  geom_smooth(method = \"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: The following aesthetics were dropped during statistical transformation:\ncolour.\nℹ This can happen when ggplot fails to infer the correct grouping structure in\n  the data.\nℹ Did you forget to specify a `group` aesthetic or to convert a numerical\n  variable into a factor?",
     "crumbs": [
       "Best Work",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Trivariate Viz</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Trivariate Viz</span>"
     ]
   },
   {
     "objectID": "bw/bw-quad.html",
     "href": "bw/bw-quad.html",
-    "title": "5  Quadvariate Viz",
+    "title": "6  Quadvariate Viz",
     "section": "",
     "text": "Use this file to generate a professional looking quadvariate visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.",
     "crumbs": [
       "Best Work",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Quadvariate Viz</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Quadvariate Viz</span>"
     ]
   },
   {
     "objectID": "bw/bw-spatial.html",
     "href": "bw/bw-spatial.html",
-    "title": "6  Spatial Viz",
+    "title": "7  Spatial Viz",
     "section": "",
     "text": "Use this file to generate a professional looking spatial visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.",
     "crumbs": [
       "Best Work",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Spatial Viz</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Spatial Viz</span>"
     ]
   },
   {
