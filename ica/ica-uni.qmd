@@ -3,3 +3,180 @@ title: "Univariate Viz"
 ---
 
 Use this file for practice with the **univariate viz** in-class activity.  Refer to the class website for details.
+
+
+
+
+title: "Univariate Viz"
+number-sections: true
+execute: 
+  eval: false
+
+
+```{r}
+library(tidyverse)
+library(dplyr)
+
+# Import data
+hikes <- read.csv("https://mac-stat.github.io/data/high_peaks.csv")
+```
+
+
+## Exercises
+
+### Exercise 1: Research Questions {.unnumbered}
+
+a.  how many hikes are there in each category?
+
+b.  What's the range in elevations?
+
+
+
+### Exercise 3: Bar Chart of Ratings - Part 1 {.unnumbered}
+
+```{r}
+#| eval: true
+
+ggplot(hikes, aes(x = rating))
+```
+
+-   just a blank canvas
+-   name of the dataset
+-   indicate which variable to plot on x-axis
+-   `aes`thetics
+
+
+
+### Exercise 4: Bar Chart of Ratings - Part 2 {.unnumbered}
+
+```{r}
+#| eval: true
+
+
+ggplot(hikes, aes(x = rating)) +
+  geom_bar()
+
+
+ggplot(hikes, aes(x = rating)) +
+  geom_bar() +
+  labs(x = "Rating", y = "Number of hikes")
+
+
+ggplot(hikes, aes(x = rating)) +
+  geom_bar(fill = "blue") +
+  labs(x = "Rating", y = "Number of hikes")
+
+
+ggplot(hikes, aes(x = rating)) +
+  geom_bar(color = "orange", fill = "blue") +
+  labs(x = "Rating", y = "Number of hikes")
+
+
+ggplot(hikes, aes(x = rating)) +
+  geom_bar(color = "orange", fill = "blue")  +
+  labs(x = "Rating", y = "Number of hikes") + 
+  theme_minimal()
+```
+
+
+### Exercise 5: Bar Chart Follow-up {.unnumbered}
+
+#### Part a {.unnumbered}
+
+-   To indicate we're still adding layers to / modifying our plot.
+-   Bars are the `geom`etric elements we're adding in this layer.
+-   labels
+-   `fill` fills in the bars. `color` outlines the bars.
+
+#### Part b {.unnumbered}
+
+Most hikes are moderate, the fewest number are difficult.
+
+#### Part c {.unnumbered}
+
+I don't like that the categories are alphabetical, not in order of difficulty level.
+
+
+
+### Exercise 6: Sad Bar Chart {.unnumbered}
+
+There are too many different outcomes of elevation.
+
+```{r}
+#| eval: true
+
+ggplot(hikes, aes(x = elevation)) + 
+  geom_bar()
+```
+
+
+
+### Exercise 7: A Histogram of Elevation {.unnumbered}
+
+#### Part a {.unnumbered}
+
+-   6
+-   1 + 1 = 2
+
+#### Part b {.unnumbered}
+
+Elevations range from roughly 3700 to 5500 feet. Elevations vary from hike to hike relatively *normally* (with a bell shape) around a typical elevation of roughly 4500 feet.
+
+
+
+### Exercise 9: Building Histograms - Part 2 {.unnumbered}
+
+```{r}
+#| eval: true
+
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram()
+
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(color = "white") 
+
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(color = "white", fill = "blue") 
+
+
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(color = "white") +
+  labs(x = "Elevation (feet)", y = "Number of hikes")
+
+
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(color = "white", binwidth = 1000) +
+  labs(x = "Elevation (feet)", y = "Number of hikes")
+
+
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(color = "white", binwidth = 5) +
+  labs(x = "Elevation (feet)", y = "Number of hikes")
+
+
+ggplot(hikes, aes(x = elevation)) +
+  geom_histogram(color = "white", binwidth = 200) +
+  labs(x = "Elevation (feet)", y = "Number of hikes")
+```
+
+
+### Exercise 10: Histogram Follow-up {.unnumbered}
+
+-   `geom_histogram()`
+-   `color` outlined the bars and `fill` filled them
+-   easier to distinguish between the bars
+-   changed the bin width
+-   we lump too many hikes together and lose track of the nuances
+-   we don't lump enough hikes together and lose track of the bigger picture trends
+
+
+### Exercise 11: Density plots {.unnumbered}
+
+```{r}
+#| eval: true
+
+ggplot(hikes, aes(x = elevation)) +
+ geom_density(color = "blue", fill = "orange")
+```
+
+

@@ -1,0 +1,7 @@
+---
+title: "solo_project"
+format: html
+editor: visual
+---
+
+

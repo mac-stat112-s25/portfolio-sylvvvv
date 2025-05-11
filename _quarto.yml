@@ -22,7 +22,7 @@ book:
   
   chapters:
     - index.qmd
-    - solo_project
+    - solo_project.qmd
 
     - part: "Best Work"
       chapters: 
