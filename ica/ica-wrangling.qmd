@@ -1,8 +1,7 @@
 ---
-title: "bw-wrangling"
+title: "ica-wrangling"
 editor: visual
 ---
-
 
 ---
 title: "Wrangling"
@@ -25,9 +24,7 @@ c.  mutate
 d.  arrange
 e.  summarize
 
-
-
-### Exercise 1: `select` Practice {-}
+### Exercise 1: `select` Practice {.unnumbered}
 
 ```{r}
 # Define elections_small
@@ -39,9 +36,7 @@ head(elections_small)
 
 ```
 
-
-
-### Exercise 2: `filter` Demo {-}
+### Exercise 2: `filter` Demo {.unnumbered}
 
 ```{r}
 # Keep only data on counties in Hawaii
@@ -81,9 +76,7 @@ elections_small |>
  filter(state_name == "Texas", dem_pct_20 > 65)
 ```
 
-
-
-### Exercise 3: `arrange` Demo {-}
+### Exercise 3: `arrange` Demo {.unnumbered}
 
 ```{r}
 # Arrange the counties in elections_small from lowest to highest percentage of 2020 Republican support
@@ -101,9 +94,7 @@ elections_small |>
   head()
 ```
 
-
-
-### Exercise 4: `mutate` Demo {-}
+### Exercise 4: `mutate` Demo {.unnumbered}
 
 ```{r}
 # Define diff_20, the difference btwn the Repub and Dem percent in 2020
@@ -126,23 +117,19 @@ elections_small |>
   head()
 ```
 
+### Exercise 5: Pipe Series {.unnumbered}
 
-
-### Exercise 5: Pipe Series {-}
-
-#### Part c {-}
+#### Part c {.unnumbered}
 
 It's more "computationally efficient" to get rid of some rows before arranging.
 
-#### Part e {-}
+#### Part e {.unnumbered}
 
 We can't select a variable before we define it!
 
+### Exercise 6: DIY Pipe Series {.unnumbered}
 
-
-### Exercise 6: DIY Pipe Series {-}
-
-#### Part a {-}
+#### Part a {.unnumbered}
 
 Here's my translation:
 
@@ -159,7 +146,7 @@ elections_small |>
 
 ```
 
-#### Part b {-}
+#### Part b {.unnumbered}
 
 Here's my translation:
 
@@ -180,9 +167,10 @@ mn_wi <- elections_small |>
 head(mn_wi)
 ```
 
-#### Part c {-}
+#### Part c {.unnumbered}
 
-There was a stronger Dem shift from 2016 to 2020 in Minnesota. Further, in most counties across both states, the percent Dem tended to be higher in 2020 than in 2016.
+There was a stronger Dem shift from 2016 to 2020 in Minnesota.
+Further, in most counties across both states, the percent Dem tended to be higher in 2020 than in 2016.
 
 ```{r}
 ggplot(mn_wi, aes(x = dem_change, fill = state_name)) + 
@@ -191,9 +179,7 @@ ggplot(mn_wi, aes(y = dem_change, x = state_name)) +
   geom_boxplot()
 ```
 
-
-
-### Exercise 7: `summarize` Demo {-}
+### Exercise 7: `summarize` Demo {.unnumbered}
 
 ```{r}
 # Calculate the median Repub vote percentage in 2020 across all counties
@@ -216,8 +202,7 @@ elections_small |>
   summarize(median_repub = median(repub_pct_20), total_votes = sum(total_votes_20))
 ```
 
-
-### Exercise 8: `summarize` + `group_by` demo {-}
+### Exercise 8: `summarize` + `group_by` demo {.unnumbered}
 
 ```{r}
 # Calculate the median 2020 Repub percent and total votes BY STATE
@@ -226,11 +211,9 @@ elections_small |>
   summarize(median_repub = median(repub_pct_20), total_votes = sum(total_votes_20)) 
 ```
 
+### Exercise 9: DIY {.unnumbered}
 
-
-### Exercise 9: DIY {-}
-
-#### Part a {-}
+#### Part a {.unnumbered}
 
 ```{r}
 # Sort the states from the most to least total votes in 2020
@@ -261,9 +244,7 @@ elections_small |>
   filter(dem_total > repub_total)
 ```
 
-
-
-### Exercise 10: Practice on New Data {-}
+### Exercise 10: Practice on New Data {.unnumbered}
 
 ```{r}
 world_cup <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-29/worldcups.csv")
@@ -315,5 +296,3 @@ ggplot(per_game_data, aes(x = year, y = goals_per_game)) +
   geom_point() + 
   geom_line()
 ```
-
-
