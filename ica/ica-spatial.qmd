@@ -3,3 +3,515 @@ title: "Spatial Viz"
 ---
 
 Use this file for practice with the **spatial viz** in-class activity.  Refer to the class website for details.
+
+
+
+---
+title: "Spatial Viz"
+number-sections: true
+execute: 
+  warning: false
+fig-env: 'figure'
+fig-pos: 'h'
+fig-align: center
+code-fold: false
+---
+
+
+
+
+## Exercises
+
+
+
+
+```{r}
+#| eval: false
+library(tidyverse)
+library(dplyr)
+
+fave_places <- read.csv("https://hash-mac.github.io/stat112site-s25/data/our_fave_places.csv")
+
+# Check it out
+head(fave_places)
+```
+
+
+
+### Example 1 {.unnumbered}
+
+Both addresses used between 0 and 450 therms per month.
+There seem to be two types of months -- those with lower use around 50 therms and those with higher use around 300/400 therms.
+
+```{r}
+
+
+# Import the data and only keep 2 addresses
+#energy <- read.csv("https://mac-stat.github.io/data/MacNaturalGas.csv") |> 
+#  dplyr::mutate(date = as.Date(paste0(month, "/1/", year), "%m/%d/%Y")) 
+#energy_imported <- energy |>
+#  filter(address != "c")
+
+# Check it out
+#head(energy_imported)
+
+
+#ggplot(energy_imported, aes(x = therms, fill = address)) + 
+#  geom_density(alpha = 0.5)
+```
+
+### Example 2 {.unnumbered}
+
+Energy use is seasonal, with higher usage in winter months.
+It seems that address a uses slightly more energy.
+
+```{r}
+#ggplot(energy_imported, aes(y = therms, x = date, color = address)) + 
+#  geom_point()
+#ggplot(energy_imported, aes(y = therms, x = date, color = address)) + 
+#  geom_line()
+```
+
+### Example 3 {.unnumbered}
+
+At both addresses, typical energy use *increased* after renovations.
+
+```{r}
+#ggplot(energy_imported, aes(y = therms, x = renovated)) + 
+#  geom_boxplot() + 
+#  facet_wrap(~ address)
+
+
+#ggplot(energy_imported, aes(x = therms, fill = renovated)) + 
+#  geom_density(alpha = 0.5) + 
+#  facet_wrap(~ address)
+```
+
+### Example 4 {.unnumbered}
+
+lurking variable = outdoor temperature (as reflected by hdd)
+
+```{r}
+#ggplot(energy_imported, aes(y = hdd, x = renovated)) + 
+#  geom_boxplot() + 
+#  facet_wrap(~ address)
+
+#ggplot(energy_imported, aes(y = therms, x = hdd, color = renovated)) + 
+#  geom_point(alpha = 0.5) + 
+#  geom_smooth(method = "lm", se = FALSE) + 
+ # facet_wrap(~ address)
+```
+
+### Example 5 {.unnumbered}
+
+BUT this was explained by a *confounding* or *omitted* or *lurking* variable: `hdd` (outdoor temperature)
+
+-   After renovation...
+-   *it happened to be colder*...
+-   which then leads to higher energy use.
+
+Thus, *when controlling for* outdoor temps, renovations led to *decreased* energy use.
+
+### Exercise 3: Your turn {.unnumbered}
+
+```{r}
+library(leaflet)
+
+# Import starbucks location data
+starbucks <- read.csv("https://mac-stat.github.io/data/starbucks.csv")
+
+# Don't worry about the syntax
+#starbucks_mn <- starbucks |>   
+#  filter(Country == "US", State.Province == "MN")
+
+#leaflet(data = starbucks_mn) |> 
+#  addTiles() |> 
+#  addMarkers()
+```
+
+### Exercise 3: A simple scatterplot {.unnumbered}
+
+It would be nice to also have some actual reference maps of countries in the background.
+
+```{r}
+#ggplot(starbucks, aes(y = Latitude, x = Longitude)) + 
+#  geom_point(size = 0.5)
+```
+
+
+### Exercise 4: Adding a country-level background {.unnumbered}
+
+#### Part a {.unnumbered}
+
+```{r}
+
+# Load the package
+library(rnaturalearth)
+
+# Get info about country boundaries across the world
+# in a "sf" or simple feature format
+world_boundaries <- ne_countries(returnclass = "sf")
+
+
+```
+
+#### Part b {.unnumbered}
+
+```{r}
+library(tidyverse)
+# What does this code produce?
+# What geom are we using for the point map?
+ggplot(world_boundaries) + 
+  geom_sf()
+
+
+```
+
+```{r}
+
+# Load package needed to change map theme
+library(mosaic)
+
+# Add a point for each Starbucks
+# NOTE: The Starbucks info is in our starbucks data, not world_boundaries
+# How does this change how we use geom_point?!
+ggplot(world_boundaries) + 
+  geom_sf() + 
+  geom_point(
+    data = starbucks,
+    aes(x = Longitude, y = Latitude),
+    alpha = 0.3, size = 0.2, color = "darkgreen"
+  ) +
+  theme_map()
+
+
+
+```
+
+
+###Exercise 5: Zooming in on some countries {.unnumbered}
+
+#### Part a {.unnumbered}
+
+```{r}
+# We'll learn this syntax soon! Don't worry about it now.
+starbucks_cma <- starbucks |> 
+  filter(Country %in% c('CA', 'MX', 'US'))
+
+
+cma_boundaries <- ne_states(
+  country = c("canada", "mexico", "united states of america"),
+  returnclass = "sf")
+```
+
+
+#### Part b {.unnumbered}
+
+```{r}
+
+# Just the boundaries
+ggplot(cma_boundaries) + 
+  geom_sf()
+
+
+# Add the points
+# And zoom in
+ggplot(cma_boundaries) + 
+  geom_sf() + 
+  geom_point(
+    data = starbucks_cma,
+    aes(x = Longitude, y = Latitude),
+    alpha = 0.3,
+    size = 0.2,
+    color = "darkgreen"
+  ) +
+  coord_sf(xlim = c(-179.14, -50)) +
+  theme_map()
+```
+
+
+
+### Exercise 6: A state and county-level map {.unnumbered}
+
+#### Part a {.unnumbered}
+
+```{r}
+starbucks_midwest <- starbucks |> 
+  filter(State.Province %in% c("MN", "ND", "SD", "WI"))
+
+# Load packages
+library(sf)
+library(maps)
+
+# Get the boundaries
+midwest_boundaries <- st_as_sf(
+  maps::map("county",
+            region = c("minnesota", "wisconsin", "north dakota", "south dakota"), 
+            fill = TRUE, plot = FALSE))
+
+# Check it out
+head(midwest_boundaries)
+```
+
+
+#### Part b {.unnumbered}
+
+Adjust the code below to make the plot!
+Remove the `#` to run it.
+
+```{r}
+ggplot(midwest_boundaries) +
+  geom_sf() +
+  geom_point(
+    data = starbucks_midwest,
+    aes(x = Longitude, y = Latitude),
+    alpha = 0.7,
+    size = 0.2,
+    color = 'darkgreen'
+  ) +
+  theme_map()
+```
+
+### Exercise 7: Contour maps {.unnumbered}
+
+Especially when there are lots of point locations, and those locations start overlapping on a map, it can be tough to visualize areas of higher *density*.
+Consider the Starbucks locations in Canada, Mexico, and the US that we mapped earlier:
+
+```{r}
+# Point map (we made this earlier)
+ggplot(cma_boundaries) + 
+  geom_sf() + 
+  geom_point(
+    data = starbucks_cma,
+    aes(x = Longitude, y = Latitude),
+    alpha = 0.3,
+    size = 0.2,
+    color = "darkgreen"
+  ) +
+  coord_sf(xlim = c(-179.14, -50), ylim = c(14.54, 83.11)) +
+  theme_map()
+```
+
+Now check out the contour map.
+
+```{r}
+# What changed in the plot?
+# What changed in our code?!
+ggplot(cma_boundaries) + 
+  geom_sf() + 
+  geom_density_2d(
+    data = starbucks_cma,
+    aes(x = Longitude, y = Latitude),
+    size = 0.2,
+    color = "darkgreen"
+  ) +
+  coord_sf(xlim = c(-179.14, -50), ylim = c(14.54, 83.11)) +
+  theme_map()
+```
+
+### Exercises Part 3: Choropleth maps {.unnumbered}
+
+Spatial data isn't always in the form of point locations!
+For example, recall the state and county-level data on presidential elections.
+
+```{r}
+elections_by_state <-  read.csv("https://mac-stat.github.io/data/election_2020_by_state.csv")
+elections_by_counties <- read.csv("https://mac-stat.github.io/data/election_2020_county.csv")
+```
+
+In these datasets, we're interested in the overall election outcome by region (state or county), not the specific geographic location of some observation.
+Let's wrangle our data first.
+
+We'll focus on just a few variables of interest, and create a new variable (`repub_20_categories`) that *discretizes* the `repub_pct_20` variable into increments of 5 percentage points (for states) or 10 percentage points (for counties):
+
+```{r}
+
+elections_by_state <- elections_by_state |> 
+  filter(state_abbr != "DC") |> 
+  select(state_name, state_abbr, repub_pct_20) |> 
+  mutate(repub_20_categories = 
+           cut(repub_pct_20, 
+               breaks = seq(30, 70, by = 5), 
+               labels = c("30-34", "35-39", "40-44", "45-49",
+                          "50-54", "55-59", "60-64", "65-70"), 
+               include.lowest = TRUE))
+
+elections_by_counties <- elections_by_counties |> 
+  select(state_name, state_abbr, county_name, county_fips,
+          repub_pct_20, median_age, median_rent) |> 
+  mutate(repub_20_categories = 
+           cut(repub_pct_20, 
+               breaks = seq(0, 100, by = 10),
+               labels = c("0-9", "10-19", "20-29", "30-39", "40-49",
+                          "50-59", "60-69", "70-79", "80-89", "90-100"),
+               include.lowest = TRUE))
+
+elections_by_counties <- elections_by_counties |> 
+  mutate(county_fips = as.character(county_fips)) |> 
+  mutate(county_fips = 
+           ifelse(nchar(county_fips) == 4, paste0("0", county_fips), county_fips))
+```
+
+### Exercise 8: State-level choropleth maps {.unnumbered}
+
+#### Part a {.unnumbered}
+
+```{r}
+# Get the latitude and longitude coordinates of state boundaries
+states_map <- map_data("state")
+
+# Check it out
+head(states_map)
+
+head(states_map)
+
+head(elections_by_state) 
+```
+
+
+#### Part b {.unnumbered}
+
+```{r}
+# Note where the dataset, elections_by_state, is used
+# Note where the background map, states_map, is used
+ggplot(elections_by_state, aes(map_id = state_name, fill = repub_pct_20)) +
+  geom_map(map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  theme_map()
+
+# Make it nicer!
+ggplot(elections_by_state, aes(map_id = state_name, fill = repub_pct_20)) +
+  geom_map(map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  theme_map() + 
+  scale_fill_gradientn(name = "% Republican", colors = c("blue", "purple", "red"), values = scales::rescale(seq(0, 100, by = 5)))
+
+ggplot(elections_by_state, aes(map_id = state_name, fill = repub_20_categories)) +
+  geom_map(map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  theme_map()
+
+# Load package needed for refining color palette
+library(RColorBrewer)
+
+# Now fix the colors
+ggplot(elections_by_state, aes(map_id = state_name, fill = repub_20_categories)) +
+  geom_map(map = states_map) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  theme_map() + 
+  scale_fill_manual(values = rev(brewer.pal(8, "RdBu")), name = "% Republican")
+
+```
+
+
+#### Part c {.unnumbered}
+
+
+```{r}
+# Get only the starbucks data from the US
+starbucks_us <- starbucks |> 
+  filter(Country == "US")
+
+# Map it
+ggplot(elections_by_state, aes(map_id = state_name, fill = repub_20_categories)) +
+  geom_map(map = states_map) +
+  geom_point(
+    data = starbucks_us,
+    aes(x = Longitude, y = Latitude),
+    size = 0.05,
+    alpha = 0.2,
+    inherit.aes = FALSE
+  ) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  theme_map() + 
+  scale_fill_manual(values = rev(brewer.pal(8, "RdBu")), name = "% Republican")
+```
+
+
+#### Part d {.unnumbered}
+
+`geom_map()`
+
+
+### Exercise 9: County-level choropleth maps {.unnumbered}
+
+Let's map the 2020 Republican support in each *county*.
+
+##### Part a {.unnumbered}
+
+We again need two pieces of information.
+
+1.  Data on elections in each county, which we already have: `elections_by_county`.
+
+2.  A background map of county boundaries in the US, stored in the `county_map` dataset in the `socviz` package:
+
+```{r}
+# Get the latitude and longitude coordinates of county boundaries
+library(socviz)
+data(county_map) 
+
+# Check it out
+head(county_map)
+
+```
+
+#### Pause {.unnumbered}
+
+**Important detail:** We officially have a headache.
+Our `county_map` refers to each county by a **5-number** `id`.
+Our `elections_by_counties` data refers to each county by a `county_fips` code, which is *mostly* the same as `id`, BUT drops any 0's at the beginning of the code.
+
+```{r}
+head(county_map)
+head(elections_by_counties)
+```
+
+This just means that we have to wrangle the data so that it can communicate with the background map.
+
+```{r}
+# Add 0's at the beginning of any fips_code that's fewer than 5 numbers long
+# Don't worry about the syntax
+elections_by_counties <- elections_by_counties |> 
+  mutate(county_fips = as.character(county_fips)) |> 
+  mutate(county_fips = 
+           ifelse(nchar(county_fips) == 4, paste0("0", county_fips), county_fips))
+```
+
+
+#### Part b {.unnumbered}
+
+*Now* map Republican support by county.
+Let's go straight to the discretized `repub_20_categories` variable, and a good color scale.
+
+```{r}
+ggplot(elections_by_counties, aes(map_id = county_fips, fill = repub_20_categories)) +
+  geom_map(map = county_map) +
+  scale_fill_manual(values = rev(brewer.pal(10, "RdBu")), name = "% Republican") +
+  expand_limits(x = county_map$long, y = county_map$lat) +
+  theme_map() +
+  theme(legend.position = "right") + 
+  coord_equal()
+```
+
+
+### Exercise 10: Play around! {.unnumbered}
+
+```{r}
+ggplot(elections_by_counties, aes(map_id = county_fips, fill = median_rent)) +
+  geom_map(map = county_map) +
+  expand_limits(x = county_map$long, y = county_map$lat) +
+  theme_map() +
+  theme(legend.position = "right") + 
+  coord_equal() + 
+  scale_fill_gradientn(name = "median rent", colors = c("white", "lightgreen", "darkgreen"))
+
+ggplot(elections_by_counties, aes(map_id = county_fips, fill = median_age)) +
+  geom_map(map = county_map) +
+  expand_limits(x = county_map$long, y = county_map$lat) +
+  theme_map() +
+  theme(legend.position = "right") + 
+  coord_equal() + 
+  scale_fill_gradientn(name = "median age", colors = terrain.colors(10))
+```
+
+
