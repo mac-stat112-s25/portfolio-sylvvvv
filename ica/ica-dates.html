@@ -59,6 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../ica/ica-reshaping.html" rel="next">
 <link href="../ica/ica-wrangling.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -242,6 +243,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../ica/ica-dates.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/ica-reshaping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reshaping</span></span></a>
   </div>
 </li>
       </ul>
@@ -1238,6 +1245,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../ica/ica-reshaping.html" class="pagination-link" aria-label="Reshaping">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Reshaping</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb47" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb47-1"><a href="#cb47-1"></a><span class="co">---</span></span>
@@ -1256,169 +1266,163 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb47-14"><a href="#cb47-14"></a>code-fold: false</span>
 <span id="cb47-15"><a href="#cb47-15"></a>---</span>
 <span id="cb47-16"><a href="#cb47-16"></a></span>
-<span id="cb47-17"><a href="#cb47-17"></a></span>
+<span id="cb47-17"><a href="#cb47-17"></a><span class="fu">## Review</span></span>
 <span id="cb47-18"><a href="#cb47-18"></a></span>
-<span id="cb47-19"><a href="#cb47-19"></a></span>
-<span id="cb47-20"><a href="#cb47-20"></a><span class="fu">## Review</span></span>
-<span id="cb47-21"><a href="#cb47-21"></a></span>
-<span id="cb47-22"><a href="#cb47-22"></a></span>
-<span id="cb47-23"><a href="#cb47-23"></a><span class="fu">### Data Science Process {-}</span></span>
-<span id="cb47-24"><a href="#cb47-24"></a></span>
-<span id="cb47-25"><a href="#cb47-25"></a>Below is the visual representation of the data science process we saw earlier.  Which stage are we in currently? </span>
-<span id="cb47-26"><a href="#cb47-26"></a></span>
-<span id="cb47-27"><a href="#cb47-27"></a><span class="al">![](https://mac-stat.github.io/images/112/legos.png)</span></span>
-<span id="cb47-28"><a href="#cb47-28"></a></span>
-<span id="cb47-29"><a href="#cb47-29"></a></span>
-<span id="cb47-30"><a href="#cb47-30"></a>Recall that wrangling is important. It is much of what we spend our efforts on in Data Science. There are lots of steps, hence R functions, that can go into data wrangling. But we can get far with the following 6 *wrangling verbs*:</span>
-<span id="cb47-31"><a href="#cb47-31"></a></span>
-<span id="cb47-32"><a href="#cb47-32"></a>| verb        | action                                            |</span>
-<span id="cb47-33"><a href="#cb47-33"></a>|:------------|:--------------------------------------------------|</span>
-<span id="cb47-34"><a href="#cb47-34"></a>| <span class="in">`arrange`</span>   | **arrange** the *rows* according to some *column* |</span>
-<span id="cb47-35"><a href="#cb47-35"></a>| <span class="in">`filter`</span>    | **filter** out or obtain a subset of the *rows*   |</span>
-<span id="cb47-36"><a href="#cb47-36"></a>| <span class="in">`select`</span>    | **select** a subset of *columns*                  |</span>
-<span id="cb47-37"><a href="#cb47-37"></a>| <span class="in">`mutate`</span>    | **mutate** or create a *column*                   |</span>
-<span id="cb47-38"><a href="#cb47-38"></a>| <span class="in">`summarize`</span> | calculate a numerical **summary** of a *column*   |</span>
-<span id="cb47-39"><a href="#cb47-39"></a>| <span class="in">`group_by`</span>  | **group** the *rows* by a specified *column*      |</span>
-<span id="cb47-40"><a href="#cb47-40"></a></span>
+<span id="cb47-19"><a href="#cb47-19"></a><span class="fu">### Data Science Process {.unnumbered}</span></span>
+<span id="cb47-20"><a href="#cb47-20"></a></span>
+<span id="cb47-21"><a href="#cb47-21"></a>Below is the visual representation of the data science process we saw earlier.</span>
+<span id="cb47-22"><a href="#cb47-22"></a>Which stage are we in currently?</span>
+<span id="cb47-23"><a href="#cb47-23"></a></span>
+<span id="cb47-24"><a href="#cb47-24"></a><span class="al">![](https://mac-stat.github.io/images/112/legos.png)</span></span>
+<span id="cb47-25"><a href="#cb47-25"></a></span>
+<span id="cb47-26"><a href="#cb47-26"></a>Recall that wrangling is important.</span>
+<span id="cb47-27"><a href="#cb47-27"></a>It is much of what we spend our efforts on in Data Science.</span>
+<span id="cb47-28"><a href="#cb47-28"></a>There are lots of steps, hence R functions, that can go into data wrangling.</span>
+<span id="cb47-29"><a href="#cb47-29"></a>But we can get far with the following 6 *wrangling verbs*:</span>
+<span id="cb47-30"><a href="#cb47-30"></a></span>
+<span id="cb47-31"><a href="#cb47-31"></a>| verb        | action                                            |</span>
+<span id="cb47-32"><a href="#cb47-32"></a>|:------------|:--------------------------------------------------|</span>
+<span id="cb47-33"><a href="#cb47-33"></a>| <span class="in">`arrange`</span>   | **arrange** the *rows* according to some *column* |</span>
+<span id="cb47-34"><a href="#cb47-34"></a>| <span class="in">`filter`</span>    | **filter** out or obtain a subset of the *rows*   |</span>
+<span id="cb47-35"><a href="#cb47-35"></a>| <span class="in">`select`</span>    | **select** a subset of *columns*                  |</span>
+<span id="cb47-36"><a href="#cb47-36"></a>| <span class="in">`mutate`</span>    | **mutate** or create a *column*                   |</span>
+<span id="cb47-37"><a href="#cb47-37"></a>| <span class="in">`summarize`</span> | calculate a numerical **summary** of a *column*   |</span>
+<span id="cb47-38"><a href="#cb47-38"></a>| <span class="in">`group_by`</span>  | **group** the *rows* by a specified *column*      |</span>
+<span id="cb47-39"><a href="#cb47-39"></a></span>
+<span id="cb47-40"><a href="#cb47-40"></a><span class="fu">### Exercise 1: More Filtering {.unnumbered}</span></span>
 <span id="cb47-41"><a href="#cb47-41"></a></span>
-<span id="cb47-42"><a href="#cb47-42"></a></span>
-<span id="cb47-43"><a href="#cb47-43"></a><span class="fu">### Exercise 1: More Filtering {.unnumbered}</span></span>
-<span id="cb47-44"><a href="#cb47-44"></a></span>
-<span id="cb47-45"><a href="#cb47-45"></a><span class="fu">#### Part a {.unnumbered}</span></span>
-<span id="cb47-46"><a href="#cb47-46"></a></span>
-<span id="cb47-49"><a href="#cb47-49"></a><span class="in">```{r}</span></span>
-<span id="cb47-50"><a href="#cb47-50"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb47-51"><a href="#cb47-51"></a>penguins <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-28/penguins.csv'</span>)</span>
+<span id="cb47-42"><a href="#cb47-42"></a><span class="fu">#### Part a {.unnumbered}</span></span>
+<span id="cb47-43"><a href="#cb47-43"></a></span>
+<span id="cb47-46"><a href="#cb47-46"></a><span class="in">```{r}</span></span>
+<span id="cb47-47"><a href="#cb47-47"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb47-48"><a href="#cb47-48"></a>penguins <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-28/penguins.csv'</span>)</span>
+<span id="cb47-49"><a href="#cb47-49"></a></span>
+<span id="cb47-50"><a href="#cb47-50"></a><span class="co"># Check it out</span></span>
+<span id="cb47-51"><a href="#cb47-51"></a><span class="fu">head</span>(penguins)</span>
 <span id="cb47-52"><a href="#cb47-52"></a></span>
-<span id="cb47-53"><a href="#cb47-53"></a><span class="co"># Check it out</span></span>
-<span id="cb47-54"><a href="#cb47-54"></a><span class="fu">head</span>(penguins)</span>
-<span id="cb47-55"><a href="#cb47-55"></a></span>
-<span id="cb47-56"><a href="#cb47-56"></a><span class="co"># Create a dataset with just Adelie and Chinstrap using %in%</span></span>
-<span id="cb47-57"><a href="#cb47-57"></a><span class="co"># Pipe this into `count(species)` to confirm that you only have these 2 species</span></span>
-<span id="cb47-58"><a href="#cb47-58"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb47-59"><a href="#cb47-59"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Adelie"</span>, <span class="st">"Chinstrap"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb47-60"><a href="#cb47-60"></a>  <span class="fu">count</span>(species)</span>
-<span id="cb47-61"><a href="#cb47-61"></a><span class="in">```</span></span>
-<span id="cb47-62"><a href="#cb47-62"></a></span>
-<span id="cb47-65"><a href="#cb47-65"></a><span class="in">```{r}</span></span>
-<span id="cb47-66"><a href="#cb47-66"></a><span class="co"># Create a dataset with just Adelie and Chinstrap using !=</span></span>
-<span id="cb47-67"><a href="#cb47-67"></a><span class="co"># Pipe this into `count(species)` to confirm that you only have these 2 species</span></span>
-<span id="cb47-68"><a href="#cb47-68"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb47-69"><a href="#cb47-69"></a>  <span class="fu">filter</span>(species <span class="sc">!=</span> <span class="st">"Gentoo"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb47-70"><a href="#cb47-70"></a>  <span class="fu">count</span>(species)</span>
-<span id="cb47-71"><a href="#cb47-71"></a><span class="in">```</span></span>
-<span id="cb47-72"><a href="#cb47-72"></a></span>
-<span id="cb47-73"><a href="#cb47-73"></a><span class="fu">#### Part b {.unnumbered}</span></span>
-<span id="cb47-74"><a href="#cb47-74"></a></span>
-<span id="cb47-75"><a href="#cb47-75"></a><span class="fu">#### Part c {.unnumbered}</span></span>
-<span id="cb47-76"><a href="#cb47-76"></a></span>
-<span id="cb47-77"><a href="#cb47-77"></a>It might get rid of data points even if they have complete information on the variables we need, just because they're missing info on variables we don't need.</span>
-<span id="cb47-78"><a href="#cb47-78"></a></span>
-<span id="cb47-79"><a href="#cb47-79"></a></span>
-<span id="cb47-80"><a href="#cb47-80"></a><span class="fu">### Exercise 2: More selecting {.unnumbered}</span></span>
-<span id="cb47-81"><a href="#cb47-81"></a></span>
-<span id="cb47-84"><a href="#cb47-84"></a><span class="in">```{r}</span></span>
-<span id="cb47-85"><a href="#cb47-85"></a><span class="co"># First: recall the variable names</span></span>
-<span id="cb47-86"><a href="#cb47-86"></a><span class="fu">names</span>(penguins)</span>
-<span id="cb47-87"><a href="#cb47-87"></a><span class="in">```</span></span>
-<span id="cb47-88"><a href="#cb47-88"></a></span>
-<span id="cb47-91"><a href="#cb47-91"></a><span class="in">```{r}</span></span>
-<span id="cb47-92"><a href="#cb47-92"></a><span class="co"># Use a shortcut to keep everything but the year and island variables</span></span>
-<span id="cb47-93"><a href="#cb47-93"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb47-94"><a href="#cb47-94"></a>  <span class="fu">select</span>(<span class="sc">-</span>year, <span class="sc">-</span>island)</span>
-<span id="cb47-95"><a href="#cb47-95"></a><span class="in">```</span></span>
-<span id="cb47-96"><a href="#cb47-96"></a></span>
-<span id="cb47-99"><a href="#cb47-99"></a><span class="in">```{r}</span></span>
-<span id="cb47-100"><a href="#cb47-100"></a><span class="co"># Use a shortcut to keep only species and the penguin characteristics measured in mm</span></span>
-<span id="cb47-101"><a href="#cb47-101"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb47-102"><a href="#cb47-102"></a>  <span class="fu">select</span>(species, <span class="fu">ends_with</span>(<span class="st">"mm"</span>))</span>
-<span id="cb47-103"><a href="#cb47-103"></a><span class="in">```</span></span>
-<span id="cb47-104"><a href="#cb47-104"></a></span>
-<span id="cb47-107"><a href="#cb47-107"></a><span class="in">```{r}</span></span>
-<span id="cb47-108"><a href="#cb47-108"></a><span class="co"># Use a shortcut to keep only species and bill-related measurements</span></span>
-<span id="cb47-109"><a href="#cb47-109"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb47-110"><a href="#cb47-110"></a>  <span class="fu">select</span>(species, <span class="fu">starts_with</span>(<span class="st">"bill"</span>))</span>
-<span id="cb47-111"><a href="#cb47-111"></a><span class="in">```</span></span>
-<span id="cb47-112"><a href="#cb47-112"></a></span>
-<span id="cb47-115"><a href="#cb47-115"></a><span class="in">```{r}</span></span>
-<span id="cb47-116"><a href="#cb47-116"></a><span class="co"># Use a shortcut to keep only species and the length-related characteristics</span></span>
-<span id="cb47-117"><a href="#cb47-117"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb47-118"><a href="#cb47-118"></a>  <span class="fu">select</span>(species, <span class="fu">contains</span>(<span class="st">"length"</span>))</span>
-<span id="cb47-119"><a href="#cb47-119"></a><span class="in">```</span></span>
-<span id="cb47-120"><a href="#cb47-120"></a></span>
-<span id="cb47-121"><a href="#cb47-121"></a></span>
-<span id="cb47-122"><a href="#cb47-122"></a><span class="fu">### Exercise 3: Arranging, counting, &amp; grouping by multiple variables {.unnumbered}</span></span>
-<span id="cb47-123"><a href="#cb47-123"></a></span>
-<span id="cb47-126"><a href="#cb47-126"></a><span class="in">```{r}</span></span>
-<span id="cb47-127"><a href="#cb47-127"></a><span class="co"># Change this code to sort the penguins by species, and then island name</span></span>
-<span id="cb47-128"><a href="#cb47-128"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: The first row should be an Adelie penguin living on Biscoe island</span></span>
-<span id="cb47-129"><a href="#cb47-129"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb47-130"><a href="#cb47-130"></a>  <span class="fu">arrange</span>(species, island) <span class="sc">|&gt;</span> </span>
-<span id="cb47-131"><a href="#cb47-131"></a>  <span class="fu">head</span>()</span>
-<span id="cb47-132"><a href="#cb47-132"></a><span class="in">```</span></span>
-<span id="cb47-133"><a href="#cb47-133"></a></span>
-<span id="cb47-136"><a href="#cb47-136"></a><span class="in">```{r}</span></span>
-<span id="cb47-137"><a href="#cb47-137"></a><span class="co"># Change this code to count the number of male/female penguins observed for each species</span></span>
-<span id="cb47-138"><a href="#cb47-138"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb47-139"><a href="#cb47-139"></a>  <span class="fu">count</span>(species, sex)</span>
-<span id="cb47-140"><a href="#cb47-140"></a><span class="in">```</span></span>
-<span id="cb47-141"><a href="#cb47-141"></a></span>
-<span id="cb47-144"><a href="#cb47-144"></a><span class="in">```{r}</span></span>
-<span id="cb47-145"><a href="#cb47-145"></a><span class="co"># Change this code to calculate the average body mass by species and sex</span></span>
-<span id="cb47-146"><a href="#cb47-146"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb47-147"><a href="#cb47-147"></a>  <span class="fu">group_by</span>(species, sex) <span class="sc">|&gt;</span> </span>
-<span id="cb47-148"><a href="#cb47-148"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb47-149"><a href="#cb47-149"></a></span>
-<span id="cb47-150"><a href="#cb47-150"></a><span class="in">```</span></span>
-<span id="cb47-151"><a href="#cb47-151"></a></span>
-<span id="cb47-152"><a href="#cb47-152"></a></span>
-<span id="cb47-153"><a href="#cb47-153"></a><span class="fu">### Exercise 4: Dates {.unnumbered}</span></span>
+<span id="cb47-53"><a href="#cb47-53"></a><span class="co"># Create a dataset with just Adelie and Chinstrap using %in%</span></span>
+<span id="cb47-54"><a href="#cb47-54"></a><span class="co"># Pipe this into `count(species)` to confirm that you only have these 2 species</span></span>
+<span id="cb47-55"><a href="#cb47-55"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb47-56"><a href="#cb47-56"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Adelie"</span>, <span class="st">"Chinstrap"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb47-57"><a href="#cb47-57"></a>  <span class="fu">count</span>(species)</span>
+<span id="cb47-58"><a href="#cb47-58"></a><span class="in">```</span></span>
+<span id="cb47-59"><a href="#cb47-59"></a></span>
+<span id="cb47-62"><a href="#cb47-62"></a><span class="in">```{r}</span></span>
+<span id="cb47-63"><a href="#cb47-63"></a><span class="co"># Create a dataset with just Adelie and Chinstrap using !=</span></span>
+<span id="cb47-64"><a href="#cb47-64"></a><span class="co"># Pipe this into `count(species)` to confirm that you only have these 2 species</span></span>
+<span id="cb47-65"><a href="#cb47-65"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb47-66"><a href="#cb47-66"></a>  <span class="fu">filter</span>(species <span class="sc">!=</span> <span class="st">"Gentoo"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb47-67"><a href="#cb47-67"></a>  <span class="fu">count</span>(species)</span>
+<span id="cb47-68"><a href="#cb47-68"></a><span class="in">```</span></span>
+<span id="cb47-69"><a href="#cb47-69"></a></span>
+<span id="cb47-70"><a href="#cb47-70"></a><span class="fu">#### Part b {.unnumbered}</span></span>
+<span id="cb47-71"><a href="#cb47-71"></a></span>
+<span id="cb47-72"><a href="#cb47-72"></a><span class="fu">#### Part c {.unnumbered}</span></span>
+<span id="cb47-73"><a href="#cb47-73"></a></span>
+<span id="cb47-74"><a href="#cb47-74"></a>It might get rid of data points even if they have complete information on the variables we need, just because they're missing info on variables we don't need.</span>
+<span id="cb47-75"><a href="#cb47-75"></a></span>
+<span id="cb47-76"><a href="#cb47-76"></a><span class="fu">### Exercise 2: More selecting {.unnumbered}</span></span>
+<span id="cb47-77"><a href="#cb47-77"></a></span>
+<span id="cb47-80"><a href="#cb47-80"></a><span class="in">```{r}</span></span>
+<span id="cb47-81"><a href="#cb47-81"></a><span class="co"># First: recall the variable names</span></span>
+<span id="cb47-82"><a href="#cb47-82"></a><span class="fu">names</span>(penguins)</span>
+<span id="cb47-83"><a href="#cb47-83"></a><span class="in">```</span></span>
+<span id="cb47-84"><a href="#cb47-84"></a></span>
+<span id="cb47-87"><a href="#cb47-87"></a><span class="in">```{r}</span></span>
+<span id="cb47-88"><a href="#cb47-88"></a><span class="co"># Use a shortcut to keep everything but the year and island variables</span></span>
+<span id="cb47-89"><a href="#cb47-89"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb47-90"><a href="#cb47-90"></a>  <span class="fu">select</span>(<span class="sc">-</span>year, <span class="sc">-</span>island)</span>
+<span id="cb47-91"><a href="#cb47-91"></a><span class="in">```</span></span>
+<span id="cb47-92"><a href="#cb47-92"></a></span>
+<span id="cb47-95"><a href="#cb47-95"></a><span class="in">```{r}</span></span>
+<span id="cb47-96"><a href="#cb47-96"></a><span class="co"># Use a shortcut to keep only species and the penguin characteristics measured in mm</span></span>
+<span id="cb47-97"><a href="#cb47-97"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb47-98"><a href="#cb47-98"></a>  <span class="fu">select</span>(species, <span class="fu">ends_with</span>(<span class="st">"mm"</span>))</span>
+<span id="cb47-99"><a href="#cb47-99"></a><span class="in">```</span></span>
+<span id="cb47-100"><a href="#cb47-100"></a></span>
+<span id="cb47-103"><a href="#cb47-103"></a><span class="in">```{r}</span></span>
+<span id="cb47-104"><a href="#cb47-104"></a><span class="co"># Use a shortcut to keep only species and bill-related measurements</span></span>
+<span id="cb47-105"><a href="#cb47-105"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb47-106"><a href="#cb47-106"></a>  <span class="fu">select</span>(species, <span class="fu">starts_with</span>(<span class="st">"bill"</span>))</span>
+<span id="cb47-107"><a href="#cb47-107"></a><span class="in">```</span></span>
+<span id="cb47-108"><a href="#cb47-108"></a></span>
+<span id="cb47-111"><a href="#cb47-111"></a><span class="in">```{r}</span></span>
+<span id="cb47-112"><a href="#cb47-112"></a><span class="co"># Use a shortcut to keep only species and the length-related characteristics</span></span>
+<span id="cb47-113"><a href="#cb47-113"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb47-114"><a href="#cb47-114"></a>  <span class="fu">select</span>(species, <span class="fu">contains</span>(<span class="st">"length"</span>))</span>
+<span id="cb47-115"><a href="#cb47-115"></a><span class="in">```</span></span>
+<span id="cb47-116"><a href="#cb47-116"></a></span>
+<span id="cb47-117"><a href="#cb47-117"></a><span class="fu">### Exercise 3: Arranging, counting, &amp; grouping by multiple variables {.unnumbered}</span></span>
+<span id="cb47-118"><a href="#cb47-118"></a></span>
+<span id="cb47-121"><a href="#cb47-121"></a><span class="in">```{r}</span></span>
+<span id="cb47-122"><a href="#cb47-122"></a><span class="co"># Change this code to sort the penguins by species, and then island name</span></span>
+<span id="cb47-123"><a href="#cb47-123"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: The first row should be an Adelie penguin living on Biscoe island</span></span>
+<span id="cb47-124"><a href="#cb47-124"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb47-125"><a href="#cb47-125"></a>  <span class="fu">arrange</span>(species, island) <span class="sc">|&gt;</span> </span>
+<span id="cb47-126"><a href="#cb47-126"></a>  <span class="fu">head</span>()</span>
+<span id="cb47-127"><a href="#cb47-127"></a><span class="in">```</span></span>
+<span id="cb47-128"><a href="#cb47-128"></a></span>
+<span id="cb47-131"><a href="#cb47-131"></a><span class="in">```{r}</span></span>
+<span id="cb47-132"><a href="#cb47-132"></a><span class="co"># Change this code to count the number of male/female penguins observed for each species</span></span>
+<span id="cb47-133"><a href="#cb47-133"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb47-134"><a href="#cb47-134"></a>  <span class="fu">count</span>(species, sex)</span>
+<span id="cb47-135"><a href="#cb47-135"></a><span class="in">```</span></span>
+<span id="cb47-136"><a href="#cb47-136"></a></span>
+<span id="cb47-139"><a href="#cb47-139"></a><span class="in">```{r}</span></span>
+<span id="cb47-140"><a href="#cb47-140"></a><span class="co"># Change this code to calculate the average body mass by species and sex</span></span>
+<span id="cb47-141"><a href="#cb47-141"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb47-142"><a href="#cb47-142"></a>  <span class="fu">group_by</span>(species, sex) <span class="sc">|&gt;</span> </span>
+<span id="cb47-143"><a href="#cb47-143"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb47-144"><a href="#cb47-144"></a></span>
+<span id="cb47-145"><a href="#cb47-145"></a><span class="in">```</span></span>
+<span id="cb47-146"><a href="#cb47-146"></a></span>
+<span id="cb47-147"><a href="#cb47-147"></a><span class="fu">### Exercise 4: Dates {.unnumbered}</span></span>
+<span id="cb47-148"><a href="#cb47-148"></a></span>
+<span id="cb47-151"><a href="#cb47-151"></a><span class="in">```{r}</span></span>
+<span id="cb47-152"><a href="#cb47-152"></a><span class="co"># Get today's date</span></span>
+<span id="cb47-153"><a href="#cb47-153"></a><span class="fu">as.Date</span>(<span class="fu">today</span>())</span>
 <span id="cb47-154"><a href="#cb47-154"></a></span>
-<span id="cb47-157"><a href="#cb47-157"></a><span class="in">```{r}</span></span>
-<span id="cb47-158"><a href="#cb47-158"></a><span class="co"># Get today's date</span></span>
-<span id="cb47-159"><a href="#cb47-159"></a><span class="fu">as.Date</span>(<span class="fu">today</span>())</span>
-<span id="cb47-160"><a href="#cb47-160"></a></span>
-<span id="cb47-161"><a href="#cb47-161"></a><span class="co"># Let's store this as "today" so we can work with it below</span></span>
-<span id="cb47-162"><a href="#cb47-162"></a>today <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="fu">today</span>())</span>
-<span id="cb47-163"><a href="#cb47-163"></a></span>
-<span id="cb47-164"><a href="#cb47-164"></a><span class="co"># Check out the class of this object</span></span>
-<span id="cb47-165"><a href="#cb47-165"></a><span class="fu">class</span>(today)</span>
-<span id="cb47-166"><a href="#cb47-166"></a><span class="in">```</span></span>
-<span id="cb47-167"><a href="#cb47-167"></a></span>
-<span id="cb47-170"><a href="#cb47-170"></a><span class="in">```{r}</span></span>
-<span id="cb47-171"><a href="#cb47-171"></a><span class="co"># Records just the 4-digit year</span></span>
-<span id="cb47-172"><a href="#cb47-172"></a><span class="fu">year</span>(today)</span>
-<span id="cb47-173"><a href="#cb47-173"></a><span class="in">```</span></span>
-<span id="cb47-174"><a href="#cb47-174"></a></span>
-<span id="cb47-177"><a href="#cb47-177"></a><span class="in">```{r}</span></span>
-<span id="cb47-178"><a href="#cb47-178"></a><span class="co"># Today's month, as a number or label</span></span>
-<span id="cb47-179"><a href="#cb47-179"></a><span class="fu">month</span>(today)</span>
-<span id="cb47-180"><a href="#cb47-180"></a><span class="fu">month</span>(today, <span class="at">label =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb47-181"><a href="#cb47-181"></a><span class="in">```</span></span>
-<span id="cb47-182"><a href="#cb47-182"></a></span>
-<span id="cb47-185"><a href="#cb47-185"></a><span class="in">```{r}</span></span>
-<span id="cb47-186"><a href="#cb47-186"></a><span class="co"># This is the week of the year (1-52)</span></span>
-<span id="cb47-187"><a href="#cb47-187"></a><span class="fu">week</span>(today)</span>
-<span id="cb47-188"><a href="#cb47-188"></a><span class="in">```</span></span>
-<span id="cb47-189"><a href="#cb47-189"></a></span>
-<span id="cb47-192"><a href="#cb47-192"></a><span class="in">```{r}</span></span>
-<span id="cb47-193"><a href="#cb47-193"></a><span class="co"># Day of the month (1-31) and day of the year (1-366)</span></span>
-<span id="cb47-194"><a href="#cb47-194"></a><span class="fu">mday</span>(today)</span>
-<span id="cb47-195"><a href="#cb47-195"></a><span class="fu">yday</span>(today)  <span class="co"># This is often called the "Julian day"</span></span>
-<span id="cb47-196"><a href="#cb47-196"></a><span class="in">```</span></span>
-<span id="cb47-197"><a href="#cb47-197"></a></span>
-<span id="cb47-200"><a href="#cb47-200"></a><span class="in">```{r}</span></span>
-<span id="cb47-201"><a href="#cb47-201"></a><span class="co"># Day of the week as a number or label</span></span>
-<span id="cb47-202"><a href="#cb47-202"></a><span class="fu">wday</span>(today)</span>
-<span id="cb47-203"><a href="#cb47-203"></a><span class="fu">wday</span>(today, <span class="at">label =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb47-204"><a href="#cb47-204"></a><span class="in">```</span></span>
-<span id="cb47-205"><a href="#cb47-205"></a></span>
-<span id="cb47-208"><a href="#cb47-208"></a><span class="in">```{r}</span></span>
-<span id="cb47-209"><a href="#cb47-209"></a><span class="co"># today is on or after Feb 14, 2024</span></span>
-<span id="cb47-210"><a href="#cb47-210"></a>today <span class="sc">&gt;=</span> <span class="fu">ymd</span>(<span class="st">"2024-02-14"</span>)</span>
-<span id="cb47-211"><a href="#cb47-211"></a><span class="co"># today is not before Feb 14, 2024</span></span>
-<span id="cb47-212"><a href="#cb47-212"></a>today <span class="sc">&lt;</span> <span class="fu">ymd</span>(<span class="st">"2024-02-14"</span>)</span>
-<span id="cb47-213"><a href="#cb47-213"></a><span class="in">```</span></span>
+<span id="cb47-155"><a href="#cb47-155"></a><span class="co"># Let's store this as "today" so we can work with it below</span></span>
+<span id="cb47-156"><a href="#cb47-156"></a>today <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="fu">today</span>())</span>
+<span id="cb47-157"><a href="#cb47-157"></a></span>
+<span id="cb47-158"><a href="#cb47-158"></a><span class="co"># Check out the class of this object</span></span>
+<span id="cb47-159"><a href="#cb47-159"></a><span class="fu">class</span>(today)</span>
+<span id="cb47-160"><a href="#cb47-160"></a><span class="in">```</span></span>
+<span id="cb47-161"><a href="#cb47-161"></a></span>
+<span id="cb47-164"><a href="#cb47-164"></a><span class="in">```{r}</span></span>
+<span id="cb47-165"><a href="#cb47-165"></a><span class="co"># Records just the 4-digit year</span></span>
+<span id="cb47-166"><a href="#cb47-166"></a><span class="fu">year</span>(today)</span>
+<span id="cb47-167"><a href="#cb47-167"></a><span class="in">```</span></span>
+<span id="cb47-168"><a href="#cb47-168"></a></span>
+<span id="cb47-171"><a href="#cb47-171"></a><span class="in">```{r}</span></span>
+<span id="cb47-172"><a href="#cb47-172"></a><span class="co"># Today's month, as a number or label</span></span>
+<span id="cb47-173"><a href="#cb47-173"></a><span class="fu">month</span>(today)</span>
+<span id="cb47-174"><a href="#cb47-174"></a><span class="fu">month</span>(today, <span class="at">label =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-175"><a href="#cb47-175"></a><span class="in">```</span></span>
+<span id="cb47-176"><a href="#cb47-176"></a></span>
+<span id="cb47-179"><a href="#cb47-179"></a><span class="in">```{r}</span></span>
+<span id="cb47-180"><a href="#cb47-180"></a><span class="co"># This is the week of the year (1-52)</span></span>
+<span id="cb47-181"><a href="#cb47-181"></a><span class="fu">week</span>(today)</span>
+<span id="cb47-182"><a href="#cb47-182"></a><span class="in">```</span></span>
+<span id="cb47-183"><a href="#cb47-183"></a></span>
+<span id="cb47-186"><a href="#cb47-186"></a><span class="in">```{r}</span></span>
+<span id="cb47-187"><a href="#cb47-187"></a><span class="co"># Day of the month (1-31) and day of the year (1-366)</span></span>
+<span id="cb47-188"><a href="#cb47-188"></a><span class="fu">mday</span>(today)</span>
+<span id="cb47-189"><a href="#cb47-189"></a><span class="fu">yday</span>(today)  <span class="co"># This is often called the "Julian day"</span></span>
+<span id="cb47-190"><a href="#cb47-190"></a><span class="in">```</span></span>
+<span id="cb47-191"><a href="#cb47-191"></a></span>
+<span id="cb47-194"><a href="#cb47-194"></a><span class="in">```{r}</span></span>
+<span id="cb47-195"><a href="#cb47-195"></a><span class="co"># Day of the week as a number or label</span></span>
+<span id="cb47-196"><a href="#cb47-196"></a><span class="fu">wday</span>(today)</span>
+<span id="cb47-197"><a href="#cb47-197"></a><span class="fu">wday</span>(today, <span class="at">label =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-198"><a href="#cb47-198"></a><span class="in">```</span></span>
+<span id="cb47-199"><a href="#cb47-199"></a></span>
+<span id="cb47-202"><a href="#cb47-202"></a><span class="in">```{r}</span></span>
+<span id="cb47-203"><a href="#cb47-203"></a><span class="co"># today is on or after Feb 14, 2024</span></span>
+<span id="cb47-204"><a href="#cb47-204"></a>today <span class="sc">&gt;=</span> <span class="fu">ymd</span>(<span class="st">"2024-02-14"</span>)</span>
+<span id="cb47-205"><a href="#cb47-205"></a><span class="co"># today is not before Feb 14, 2024</span></span>
+<span id="cb47-206"><a href="#cb47-206"></a>today <span class="sc">&lt;</span> <span class="fu">ymd</span>(<span class="st">"2024-02-14"</span>)</span>
+<span id="cb47-207"><a href="#cb47-207"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
