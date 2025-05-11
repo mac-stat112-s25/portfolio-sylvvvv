@@ -22,129 +22,6 @@ code-fold: false
 
 
 
-
-
-## Review
-
-Let's review some *univariate* concepts and code using our class survey data. If the answers aren't at the top of your mind, don't fret! We've barely started speaking this new language, and learned a ton of vocab last week, so you naturally won't remember it all.
-
-```{r}
-# Import data
-survey <- read.csv("https://hash-mac.github.io/stat112site-s25/data/survey.csv")
-
-# How many students have now filled out the survey?
-
-
-# What type of variables do we have?
-
-```
-
-
-
-### Example 1: Hangout Preferences {-}
-
-Students were asked, in that moment, where they'd most like to spend time outside. How did they answer? Was there a lot of agreement or a lot of variability in answers? Build and interpret a plot that helps address these questions while reviewing:
-
--   "code as communication"
--   connecting with the components of a plot:
-    -   set up a **frame**
-    -   add a **layer** / geometric element
-    -   change the **theme**, e.g. axis labels, color, fill
-
-```{r}
-# Attach a package needed to use the ggplot function
-
-
-# Make a ggplot
-
-```
-
-```{r echo=FALSE, message=FALSE}
-library(tidyverse)
-```
-
-
-### Example 2: Temperature Preferences {-}
-
-Students were asked about their ideal outdoor temperature, in degrees Celsius. How did they answer? What was the typical response? What was the range in responses? Were there any outliers? Build and interpret 2 plots that help address these questions.
-
-```{r}
-```
-
-
-
-::: {.callout-note title="Bar Charts vs. Histograms"}
-Bar charts & histograms can appear pretty similar, but they do different things.
-
--   **Bar charts** count up the number of observations of each outcome of a variable. They're good for *categorical* variables, or *quantitative* variables with only a handful of possible outcomes.
--   **Histograms** count up the number of observations that fall into different numerical *ranges* of variable. They're good for *quantitative* variables, especially those with many different observed outcomes.
-:::
-
-
-
-## New stuff
-
-Thus far, we've been studying one variable at a time, using *univariate* plots. But once we get a sense of how individual variables behave on their own, our questions often turn to *relationships* among variables. For example, in our `hikes` data:
-
--   How much `time` does it take to complete a hike? ------\> How is `time` related to a hike's `elevation`? What about its `length`?
--   How does difficult `rating` vary from hike to hike? -------\> How is difficulty `rating` related to a hike's `ascent`?
-
-
-### Exploring relationships
-
-Exploring univariate patterns often sparks follow-up questions about **relationships** between 2+ variables. Often, but not always, variables take on specific roles:
-
--   **response variable**: the variable whose variability we would like to explain (`time` to complete a hike)
--   **predictors**: variables that might explain some of the variability in the response (a hike's `elevation` or `length`)
-
-Visualizations can help explore:
-
--   relationship *trends* (direction and form)
--   relationship *strength* (degree of variability from the trend)
--   *outliers* in the relationship
-
-#### Example 3 {-}
-
-For each pair of variables below, sketch on paper a visualization of their relationship. Focus on general viz process, don't worry about the exact details. The data here are totally made up.
-
-  a.  3pm temperature (response) vs 9am temperature (predictor)
-
-```{r}
-data.frame(temp_3pm = c(24, 26, 20, 15, 15, 15), temp_9am = c(14, 18, 15, 13, 11, 11))
-```
-
-  b.  3pm temperature (response) vs location (predictor)
-
-```{r}
-weather <- data.frame(temp_3pm = c(24, 26, 20, 15, 15, 0, 40, 60, 57, 44, 51, 75),
-                      location = rep(c("A", "B"), each = 6))
-weather
-```
-
-Think: How might we modify the below density plot of `temp_3pm` to distinguish between locations?
-
-```{r}
-ggplot(weather, aes(x = temp_3pm)) +
-      geom_density()
-```
-
-c.  `rain_today` (the response) and `location` (the predictor)
-
-```{r}
-weather <- data.frame(rain_today = c("no", "no", "no", "no", "yes", "no", "yes", "no", "yes", "yes", "no", "yes"),
-                        location = c(rep("A", 7), rep("B", 5)))
-    weather
-```
-
-Think: How might we modify the below bar plot of `location` to distinguish between days on which it did or didn't rain?
-
-```{r}
-ggplot(weather, aes(x = location)) +
-      geom_bar()
-```
-
-
-
 ### General guidance for building bivariate plots
 
 As with univariate plots, an appropriate visualization for the relationship between 2 variables depends upon whether the variables are **quantitative** or **categorical**. In general:
@@ -156,7 +33,6 @@ As with univariate plots, an appropriate visualization for the relationship betw
 
 ## Exercises (required)
 
-{{< include activity-instructions.qmd >}}
 
 [Github user Tony McGovern](https://github.com/tonmcg/US_County_Level_Election_Results_08-20) has compiled and made available 2020/2016/2012 presidential election results for most of 3000+ U.S. counties, except Alaska. (Image: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Map_of_USA_with_county_outlines_(black_%26_white).png))
 
@@ -234,6 +110,8 @@ head(elections)
 ### Exercise 0:
 
 ```{r}
+library(tidyverse)
+
 ggplot(elections, aes(x = winner_20)) + 
   geom_bar()
 ggplot(elections, aes(x = repub_pct_20)) + 

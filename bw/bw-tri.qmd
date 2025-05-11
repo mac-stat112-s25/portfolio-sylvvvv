@@ -3,3 +3,21 @@ title: "Trivariate Viz"
 ---
 
 Use this file to generate a professional looking **trivariate** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+
+
+```{r}
+
+library(ggplot2)
+
+# Import and check out data
+education <- read.csv("https://mac-stat.github.io/data/sat.csv")
+head(education)
+
+#from exercise muiltivariate
+ggplot(education, aes(x=salary, y=sat, color=expend)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+
+
+```
