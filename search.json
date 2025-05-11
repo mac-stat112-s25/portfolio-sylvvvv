@@ -281,5 +281,16 @@
       "In-class Activities",
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>Joining</span>"
     ]
+  },
+  {
+    "objectID": "ica/ica-factors.html",
+    "href": "ica/ica-factors.html",
+    "title": "Factors",
+    "section": "",
+    "text": "Exercise 1: Changing Order\n\nlibrary(tidyverse)\n# Get rid of some duplicate rows!\ngrades &lt;- read.csv(\"https://mac-stat.github.io/data/grades.csv\") |&gt; \n  distinct(sid, sessionID, .keep_all = TRUE)\n\n# Check it out\nhead(grades)\n\n     sid grade   sessionID\n1 S31185    D+ session1784\n2 S31185    B+ session1785\n3 S31185    A- session1791\n4 S31185    B+ session1792\n5 S31185    B- session1794\n6 S31185    C+ session1795\n\ngrade_distribution &lt;- grades |&gt; \n  count(grade)\n\nhead(grade_distribution)\n\n  grade    n\n1     A 1506\n2    A- 1381\n3    AU   27\n4     B  804\n5    B+ 1003\n6    B-  330\n\ngrade_distribution |&gt;\n  mutate(grade = fct_relevel(grade, c(\"A\", \"A-\", \"B+\", \"B\", \"B-\", \"C+\", \"C\", \"C-\", \"D+\", \"D\", \"D-\", \"NC\", \"S\", \"AU\"))) |&gt;\n  ggplot(aes(x = grade, y = n)) +\n    geom_col()\n\n\n\n\n\n\n\n\ngrade_distribution |&gt;\n  mutate(grade = fct_reorder(grade, n)) |&gt;\n  ggplot(aes(x = grade, y = n)) +\n    geom_col()\n\n\n\n\n\n\n\n\ngrade_distribution |&gt;\n  mutate(grade = fct_reorder(grade, n, .desc = TRUE)) |&gt;\n  ggplot(aes(x = grade, y = n)) +\n    geom_col()\n\n\n\n\n\n\n\nExercise 2: Changing Factor Level Labels\n\ngrade_distribution |&gt;\n  mutate(grade = fct_relevel(grade, c(\"A\", \"A-\", \"B+\", \"B\", \"B-\", \"C+\", \"C\", \"C-\", \"D+\", \"D\", \"D-\", \"NC\", \"S\", \"AU\"))) |&gt;\n  mutate(grade = fct_recode(grade, \"Satisfactory\" = \"S\", \"Audit\" = \"AU\")) |&gt;  # Multiple pieces go into the last 2 blanks\n  ggplot(aes(x = grade, y = n)) +\n    geom_col()",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Factors</span>"
+    ]
   }
 ]

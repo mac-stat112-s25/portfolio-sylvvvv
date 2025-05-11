@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>5&nbsp; Quadvariate Viz – COMP/STAT112 Notebook</title>
+<title>Factors – COMP/STAT112 Notebook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,8 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../bw/bw-spatial.html" rel="next">
-<link href="../bw/bw-tri.html" rel="prev">
+<link href="../ica/ica-joining.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -106,7 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../bw/bw-uni.html">Best Work</a></li><li class="breadcrumb-item"><a href="../bw/bw-quad.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quadvariate Viz</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ica/ica-uni.html">In-class Activities</a></li><li class="breadcrumb-item"><a href="../ica/ica-factors.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Factors</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -176,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../bw/bw-quad.html" class="sidebar-item-text sidebar-link active">
+  <a href="../bw/bw-quad.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quadvariate Viz</span></span></a>
   </div>
 </li>
@@ -259,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ica/ica-factors.html" class="sidebar-item-text sidebar-link">
+  <a href="../ica/ica-factors.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
   </div>
 </li>
@@ -269,14 +268,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#exercise-1-changing-order" id="toc-exercise-1-changing-order" class="nav-link active" data-scroll-target="#exercise-1-changing-order">Exercise 1: Changing Order</a></li>
+  <li><a href="#exercise-2-changing-factor-level-labels" id="toc-exercise-2-changing-factor-level-labels" class="nav-link" data-scroll-target="#exercise-2-changing-factor-level-labels">Exercise 2: Changing Factor Level Labels</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../bw/bw-uni.html">Best Work</a></li><li class="breadcrumb-item"><a href="../bw/bw-quad.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quadvariate Viz</span></a></li></ol></nav><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Quadvariate Viz</span>
-</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ica/ica-uni.html">In-class Activities</a></li><li class="breadcrumb-item"><a href="../ica/ica-factors.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Factors</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Factors</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -290,30 +292,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>Use this file to generate a professional looking <strong>quadvariate</strong> visualization. The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.</p>
+</header><section id="exercise-1-changing-order" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="exercise-1-changing-order">Exercise 1: Changing Order</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>fbicrime <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-18/agencies.csv"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#from hw3, fbicrime</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">ggplot</span>(fbicrime, <span class="fu">aes</span>(<span class="at">x =</span> is_nibrs, <span class="at">fill =</span> agency_type)) <span class="sc">+</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>agency_type) <span class="sc">+</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="fu">labs</span>(</span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="at">title =</span> <span class="st">"Plot of FBI Agencies' Crime Rate"</span>,</span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="at">caption =</span> <span class="st">"Sylvie L."</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Groups with fewer than two data points have been dropped.</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># Get rid of some duplicate rows!</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>grades <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://mac-stat.github.io/data/grades.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">distinct</span>(sid, sessionID, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># Check it out</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">head</span>(grades)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     sid grade   sessionID
+1 S31185    D+ session1784
+2 S31185    B+ session1785
+3 S31185    A- session1791
+4 S31185    B+ session1792
+5 S31185    B- session1794
+6 S31185    C+ session1795</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
--Inf</code></pre>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>grade_distribution <span class="ot">&lt;-</span> grades <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">count</span>(grade)</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">head</span>(grade_distribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  grade    n
+1     A 1506
+2    A- 1381
+3    AU   27
+4     B  804
+5    B+ 1003
+6    B-  330</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>grade_distribution <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(<span class="at">grade =</span> <span class="fu">fct_relevel</span>(grade, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"A-"</span>, <span class="st">"B+"</span>, <span class="st">"B"</span>, <span class="st">"B-"</span>, <span class="st">"C+"</span>, <span class="st">"C"</span>, <span class="st">"C-"</span>, <span class="st">"D+"</span>, <span class="st">"D"</span>, <span class="st">"D-"</span>, <span class="st">"NC"</span>, <span class="st">"S"</span>, <span class="st">"AU"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="bw-quad_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="ica-factors_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>grade_distribution <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(<span class="at">grade =</span> <span class="fu">fct_reorder</span>(grade, n)) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="ica-factors_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>grade_distribution <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">mutate</span>(<span class="at">grade =</span> <span class="fu">fct_reorder</span>(grade, n, <span class="at">.desc =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="ica-factors_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="exercise-2-changing-factor-level-labels" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="exercise-2-changing-factor-level-labels">Exercise 2: Changing Factor Level Labels</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>grade_distribution <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">mutate</span>(<span class="at">grade =</span> <span class="fu">fct_relevel</span>(grade, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"A-"</span>, <span class="st">"B+"</span>, <span class="st">"B"</span>, <span class="st">"B-"</span>, <span class="st">"C+"</span>, <span class="st">"C"</span>, <span class="st">"C-"</span>, <span class="st">"D+"</span>, <span class="st">"D"</span>, <span class="st">"D-"</span>, <span class="st">"NC"</span>, <span class="st">"S"</span>, <span class="st">"AU"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">mutate</span>(<span class="at">grade =</span> <span class="fu">fct_recode</span>(grade, <span class="st">"Satisfactory"</span> <span class="ot">=</span> <span class="st">"S"</span>, <span class="st">"Audit"</span> <span class="ot">=</span> <span class="st">"AU"</span>)) <span class="sc">|&gt;</span>  <span class="co"># Multiple pieces go into the last 2 blanks</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="ica-factors_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -322,8 +376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <!-- -->
 
-
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -943,39 +996,74 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../bw/bw-tri.html" class="pagination-link" aria-label="Trivariate Viz">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Trivariate Viz</span></span>
+      <a href="../ica/ica-joining.html" class="pagination-link" aria-label="Joining">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Joining</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../bw/bw-spatial.html" class="pagination-link" aria-label="Spatial Viz">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Spatial Viz</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">---</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="an">title:</span><span class="co"> "Quadvariate Viz"</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">---</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a>Use this file to generate a professional looking **quadvariate** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.</span>
-<span id="cb4-6"><a href="#cb4-6"></a></span>
-<span id="cb4-7"><a href="#cb4-7"></a></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="in">```{r}</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a>fbicrime <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-18/agencies.csv"</span>)</span>
-<span id="cb4-12"><a href="#cb4-12"></a></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-14"><a href="#cb4-14"></a></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#from hw3, fbicrime</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="fu">ggplot</span>(fbicrime, <span class="fu">aes</span>(<span class="at">x =</span> is_nibrs, <span class="at">fill =</span> agency_type)) <span class="sc">+</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>agency_type) <span class="sc">+</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-20"><a href="#cb4-20"></a>  <span class="at">title =</span> <span class="st">"Plot of FBI Agencies' Crime Rate"</span>,</span>
-<span id="cb4-21"><a href="#cb4-21"></a>  <span class="at">caption =</span> <span class="st">"Sylvie L."</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a>  )</span>
-<span id="cb4-23"><a href="#cb4-23"></a></span>
-<span id="cb4-24"><a href="#cb4-24"></a></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="an">title:</span><span class="co"> "ica-factors"</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">---</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>---</span>
+<span id="cb9-7"><a href="#cb9-7"></a>title: "Factors"</span>
+<span id="cb9-8"><a href="#cb9-8"></a>number-sections: true</span>
+<span id="cb9-9"><a href="#cb9-9"></a>execute: </span>
+<span id="cb9-10"><a href="#cb9-10"></a>  warning: false</span>
+<span id="cb9-11"><a href="#cb9-11"></a>fig-env: 'figure'</span>
+<span id="cb9-12"><a href="#cb9-12"></a>fig-pos: 'h'</span>
+<span id="cb9-13"><a href="#cb9-13"></a>fig-align: center</span>
+<span id="cb9-14"><a href="#cb9-14"></a>code-fold: false</span>
+<span id="cb9-15"><a href="#cb9-15"></a>---</span>
+<span id="cb9-16"><a href="#cb9-16"></a></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="fu">### Exercise 1: Changing Order {.unnumbered}</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="in">```{r}</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="co"># Get rid of some duplicate rows!</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>grades <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://mac-stat.github.io/data/grades.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb9-25"><a href="#cb9-25"></a>  <span class="fu">distinct</span>(sid, sessionID, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-26"><a href="#cb9-26"></a></span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="co"># Check it out</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="fu">head</span>(grades)</span>
+<span id="cb9-29"><a href="#cb9-29"></a></span>
+<span id="cb9-30"><a href="#cb9-30"></a>grade_distribution <span class="ot">&lt;-</span> grades <span class="sc">|&gt;</span> </span>
+<span id="cb9-31"><a href="#cb9-31"></a>  <span class="fu">count</span>(grade)</span>
+<span id="cb9-32"><a href="#cb9-32"></a></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="fu">head</span>(grade_distribution)</span>
+<span id="cb9-34"><a href="#cb9-34"></a></span>
+<span id="cb9-35"><a href="#cb9-35"></a>grade_distribution <span class="sc">|&gt;</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a>  <span class="fu">mutate</span>(<span class="at">grade =</span> <span class="fu">fct_relevel</span>(grade, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"A-"</span>, <span class="st">"B+"</span>, <span class="st">"B"</span>, <span class="st">"B-"</span>, <span class="st">"C+"</span>, <span class="st">"C"</span>, <span class="st">"C-"</span>, <span class="st">"D+"</span>, <span class="st">"D"</span>, <span class="st">"D-"</span>, <span class="st">"NC"</span>, <span class="st">"S"</span>, <span class="st">"AU"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a>    <span class="fu">geom_col</span>()</span>
+<span id="cb9-39"><a href="#cb9-39"></a><span class="in">```</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a></span>
+<span id="cb9-43"><a href="#cb9-43"></a><span class="in">```{r}</span></span>
+<span id="cb9-44"><a href="#cb9-44"></a>grade_distribution <span class="sc">|&gt;</span></span>
+<span id="cb9-45"><a href="#cb9-45"></a>  <span class="fu">mutate</span>(<span class="at">grade =</span> <span class="fu">fct_reorder</span>(grade, n)) <span class="sc">|&gt;</span></span>
+<span id="cb9-46"><a href="#cb9-46"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a>    <span class="fu">geom_col</span>()</span>
+<span id="cb9-48"><a href="#cb9-48"></a><span class="in">```</span></span>
+<span id="cb9-49"><a href="#cb9-49"></a></span>
+<span id="cb9-52"><a href="#cb9-52"></a><span class="in">```{r}</span></span>
+<span id="cb9-53"><a href="#cb9-53"></a>grade_distribution <span class="sc">|&gt;</span></span>
+<span id="cb9-54"><a href="#cb9-54"></a>  <span class="fu">mutate</span>(<span class="at">grade =</span> <span class="fu">fct_reorder</span>(grade, n, <span class="at">.desc =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-55"><a href="#cb9-55"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb9-56"><a href="#cb9-56"></a>    <span class="fu">geom_col</span>()</span>
+<span id="cb9-57"><a href="#cb9-57"></a><span class="in">```</span></span>
+<span id="cb9-58"><a href="#cb9-58"></a></span>
+<span id="cb9-59"><a href="#cb9-59"></a><span class="fu">### Exercise 2: Changing Factor Level Labels {.unnumbered}</span></span>
+<span id="cb9-60"><a href="#cb9-60"></a></span>
+<span id="cb9-63"><a href="#cb9-63"></a><span class="in">```{r}</span></span>
+<span id="cb9-64"><a href="#cb9-64"></a>grade_distribution <span class="sc">|&gt;</span></span>
+<span id="cb9-65"><a href="#cb9-65"></a>  <span class="fu">mutate</span>(<span class="at">grade =</span> <span class="fu">fct_relevel</span>(grade, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"A-"</span>, <span class="st">"B+"</span>, <span class="st">"B"</span>, <span class="st">"B-"</span>, <span class="st">"C+"</span>, <span class="st">"C"</span>, <span class="st">"C-"</span>, <span class="st">"D+"</span>, <span class="st">"D"</span>, <span class="st">"D-"</span>, <span class="st">"NC"</span>, <span class="st">"S"</span>, <span class="st">"AU"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb9-66"><a href="#cb9-66"></a>  <span class="fu">mutate</span>(<span class="at">grade =</span> <span class="fu">fct_recode</span>(grade, <span class="st">"Satisfactory"</span> <span class="ot">=</span> <span class="st">"S"</span>, <span class="st">"Audit"</span> <span class="ot">=</span> <span class="st">"AU"</span>)) <span class="sc">|&gt;</span>  <span class="co"># Multiple pieces go into the last 2 blanks</span></span>
+<span id="cb9-67"><a href="#cb9-67"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb9-68"><a href="#cb9-68"></a>    <span class="fu">geom_col</span>()</span>
+<span id="cb9-69"><a href="#cb9-69"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
