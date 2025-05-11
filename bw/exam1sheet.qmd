@@ -3,8 +3,4 @@ title: "exam1summarysheet"
 editor: visual
 ---
 
-
-```{r}
-exam1sheet <- read_file("~/Desktop/WechatIMG1036.png")
-```
-
+![](~/Desktop/WechatIMG1036.png)
