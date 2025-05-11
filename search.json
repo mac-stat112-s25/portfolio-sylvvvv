@@ -67,9 +67,20 @@
   {
     "objectID": "ica/ica-uni.html",
     "href": "ica/ica-uni.html",
-    "title": "7  Univariate Viz",
+    "title": "\n7  Univariate Viz\n",
     "section": "",
-    "text": "Use this file for practice with the univariate viz in-class activity. Refer to the class website for details.",
+    "text": "7.1 Exercises",
+    "crumbs": [
+      "In-class Activities",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz</span>"
+    ]
+  },
+  {
+    "objectID": "ica/ica-uni.html#exercises",
+    "href": "ica/ica-uni.html#exercises",
+    "title": "\n7  Univariate Viz\n",
+    "section": "",
+    "text": "Exercise 1: Research Questions\n\nhow many hikes are there in each category?\nWhat’s the range in elevations?\nExercise 3: Bar Chart of Ratings - Part 1\n\nggplot(hikes, aes(x = rating))\n\n\n\n\n\n\n\n\njust a blank canvas\nname of the dataset\nindicate which variable to plot on x-axis\n\naesthetics\nExercise 4: Bar Chart of Ratings - Part 2\n\nggplot(hikes, aes(x = rating)) +\n  geom_bar()\n\n\n\n\n\n\nggplot(hikes, aes(x = rating)) +\n  geom_bar() +\n  labs(x = \"Rating\", y = \"Number of hikes\")\n\n\n\n\n\n\nggplot(hikes, aes(x = rating)) +\n  geom_bar(fill = \"blue\") +\n  labs(x = \"Rating\", y = \"Number of hikes\")\n\n\n\n\n\n\nggplot(hikes, aes(x = rating)) +\n  geom_bar(color = \"orange\", fill = \"blue\") +\n  labs(x = \"Rating\", y = \"Number of hikes\")\n\n\n\n\n\n\nggplot(hikes, aes(x = rating)) +\n  geom_bar(color = \"orange\", fill = \"blue\")  +\n  labs(x = \"Rating\", y = \"Number of hikes\") + \n  theme_minimal()\n\n\n\n\n\n\n\nExercise 5: Bar Chart Follow-up\nPart a\n\nTo indicate we’re still adding layers to / modifying our plot.\nBars are the geometric elements we’re adding in this layer.\nlabels\n\nfill fills in the bars. color outlines the bars.\nPart b\nMost hikes are moderate, the fewest number are difficult.\nPart c\nI don’t like that the categories are alphabetical, not in order of difficulty level.\nExercise 6: Sad Bar Chart\nThere are too many different outcomes of elevation.\n\nggplot(hikes, aes(x = elevation)) + \n  geom_bar()\n\n\n\n\n\n\n\nExercise 7: A Histogram of Elevation\nPart a\n\n6\n1 + 1 = 2\nPart b\nElevations range from roughly 3700 to 5500 feet. Elevations vary from hike to hike relatively normally (with a bell shape) around a typical elevation of roughly 4500 feet.\nExercise 9: Building Histograms - Part 2\n\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\") \n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\", fill = \"blue\") \n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\") +\n  labs(x = \"Elevation (feet)\", y = \"Number of hikes\")\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\", binwidth = 1000) +\n  labs(x = \"Elevation (feet)\", y = \"Number of hikes\")\n\n\n\n\n\n\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\", binwidth = 5) +\n  labs(x = \"Elevation (feet)\", y = \"Number of hikes\")\n\n\n\n\n\n\nggplot(hikes, aes(x = elevation)) +\n  geom_histogram(color = \"white\", binwidth = 200) +\n  labs(x = \"Elevation (feet)\", y = \"Number of hikes\")\n\n\n\n\n\n\n\nExercise 10: Histogram Follow-up\n\ngeom_histogram()\n\ncolor outlined the bars and fill filled them\neasier to distinguish between the bars\nchanged the bin width\nwe lump too many hikes together and lose track of the nuances\nwe don’t lump enough hikes together and lose track of the bigger picture trends\nExercise 11: Density plots\n\nggplot(hikes, aes(x = elevation)) +\n geom_density(color = \"blue\", fill = \"orange\")",
     "crumbs": [
       "In-class Activities",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Univariate Viz</span>"
