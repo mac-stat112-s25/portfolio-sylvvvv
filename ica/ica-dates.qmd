@@ -1,0 +1,176 @@
+---
+title: "ica-dates"
+editor: visual
+---
+
+---
+title: "Dates"
+number-sections: true
+execute: 
+  warning: false
+fig-env: 'figure'
+fig-pos: 'h'
+fig-align: center
+code-fold: false
+---
+
+## Review
+
+### Data Science Process {.unnumbered}
+
+Below is the visual representation of the data science process we saw earlier.
+Which stage are we in currently?
+
+![](https://mac-stat.github.io/images/112/legos.png)
+
+Recall that wrangling is important.
+It is much of what we spend our efforts on in Data Science.
+There are lots of steps, hence R functions, that can go into data wrangling.
+But we can get far with the following 6 *wrangling verbs*:
+
+| verb        | action                                            |
+|:------------|:--------------------------------------------------|
+| `arrange`   | **arrange** the *rows* according to some *column* |
+| `filter`    | **filter** out or obtain a subset of the *rows*   |
+| `select`    | **select** a subset of *columns*                  |
+| `mutate`    | **mutate** or create a *column*                   |
+| `summarize` | calculate a numerical **summary** of a *column*   |
+| `group_by`  | **group** the *rows* by a specified *column*      |
+
+### Exercise 1: More Filtering {.unnumbered}
+
+#### Part a {.unnumbered}
+
+```{r}
+
+library(tidyverse)
+penguins <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-28/penguins.csv')
+
+# Check it out
+head(penguins)
+
+# Create a dataset with just Adelie and Chinstrap using %in%
+# Pipe this into `count(species)` to confirm that you only have these 2 species
+penguins |>
+  filter(species %in% c("Adelie", "Chinstrap")) |>
+  count(species)
+```
+
+```{r}
+# Create a dataset with just Adelie and Chinstrap using !=
+# Pipe this into `count(species)` to confirm that you only have these 2 species
+penguins |>
+  filter(species != "Gentoo") |>
+  count(species)
+```
+
+#### Part b {.unnumbered}
+
+#### Part c {.unnumbered}
+
+It might get rid of data points even if they have complete information on the variables we need, just because they're missing info on variables we don't need.
+
+### Exercise 2: More selecting {.unnumbered}
+
+```{r}
+# First: recall the variable names
+names(penguins)
+```
+
+```{r}
+# Use a shortcut to keep everything but the year and island variables
+penguins |> 
+  select(-year, -island)
+```
+
+```{r}
+# Use a shortcut to keep only species and the penguin characteristics measured in mm
+penguins |> 
+  select(species, ends_with("mm"))
+```
+
+```{r}
+# Use a shortcut to keep only species and bill-related measurements
+penguins |> 
+  select(species, starts_with("bill"))
+```
+
+```{r}
+# Use a shortcut to keep only species and the length-related characteristics
+penguins |> 
+  select(species, contains("length"))
+```
+
+### Exercise 3: Arranging, counting, & grouping by multiple variables {.unnumbered}
+
+```{r}
+# Change this code to sort the penguins by species, and then island name
+# NOTE: The first row should be an Adelie penguin living on Biscoe island
+penguins |> 
+  arrange(species, island) |> 
+  head()
+```
+
+```{r}
+# Change this code to count the number of male/female penguins observed for each species
+penguins |> 
+  count(species, sex)
+```
+
+```{r}
+# Change this code to calculate the average body mass by species and sex
+penguins |> 
+  group_by(species, sex) |> 
+  summarize(mean = mean(body_mass_g, na.rm = TRUE))
+
+```
+
+### Exercise 4: Dates {.unnumbered}
+
+```{r}
+
+
+# Get today's date
+as.Date(today())
+
+# Let's store this as "today" so we can work with it below
+today <- as.Date(today())
+
+# Check out the class of this object
+class(today)
+```
+
+```{r}
+# Records just the 4-digit year
+year(today)
+```
+
+```{r}
+# Today's month, as a number or label
+month(today)
+month(today, label = TRUE)
+```
+
+```{r}
+# This is the week of the year (1-52)
+week(today)
+```
+
+```{r}
+# Day of the month (1-31) and day of the year (1-366)
+mday(today)
+yday(today)  # This is often called the "Julian day"
+```
+
+```{r}
+# Day of the week as a number or label
+wday(today)
+wday(today, label = TRUE)
+```
+
+```{r}
+# today is on or after Feb 14, 2024
+today >= ymd("2024-02-14")
+# today is not before Feb 14, 2024
+today < ymd("2024-02-14")
+```

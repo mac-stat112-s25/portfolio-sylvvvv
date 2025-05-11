@@ -1,0 +1,161 @@
+---
+title: "ica-strings"
+editor: visual
+---
+
+---
+title: "Strings"
+number-sections: true
+execute: 
+  warning: false
+fig-env: 'figure'
+fig-pos: 'h'
+fig-align: center
+code-fold: false
+---
+
+
+
+## Review
+
+**WHERE ARE WE?**
+
+We're in the *last day* of our "data preparation" unit:
+
+![](https://mac-stat.github.io/images/112/legos.png)
+
+## Strings
+
+In the previous class, we started discussing some considerations in working with special types of "categorical" variables: *characters* and *factors* which are:
+
+1.  **Converting characters to factors (and factors to meaningful factors)**--last time\
+    When categorical information is stored as a *character* variable, the categories of interest might not be labeled or ordered in a meaningful way. We can fix that!
+
+2.  **Strings**--today!\
+    When working with character strings, we might want to detect, replace, or extract certain *patterns*. For example, recall our data on `courses`:
+
+```{r echo = FALSE}
+library(tidyverse)
+courses_old <- read.csv("https://mac-stat.github.io/data/courses.csv")
+
+# Check out the data
+head(courses_old)
+
+# Check out the structure of each variable
+# Many of these are characters!
+str(courses_old)
+```
+
+Focusing on just the `sem` character variable, we might want to...
+
+- change `FA` to `fall_` and `SP` to `spring_`
+- keep only courses taught in fall
+- split the variable into 2 new variables: `semester` (`FA` or `SP`) and `year`
+
+
+3.  Much more!--maybe in your projects or COMP/STAT 212\
+    There are a lot of ways to process character variables. For example, we might have a variable that records the text for a sample of news articles. We might want to analyze things like the articles' *sentiments*, word counts, typical word lengths, most common words, etc.
+
+
+### Exercise 1: Popular time slots {.unnumbered}
+
+```{r}
+
+courses <- read.csv("https://mac-stat.github.io/data/registrar.csv")
+
+# Check it out
+head(courses)
+
+
+# Construct a table that indicates the number of classes offered in each day/time slot
+# Print only the 6 most popular time slots
+courses |> 
+  count(days, time) |> 
+  arrange(desc(n)) |> 
+  head()
+```
+
+
+
+### Exercise 2: Prep the data {.unnumbered}
+
+```{r}
+courses_clean <- courses |> 
+  separate(avail_max, c("avail", "max"), sep = " / ") |> 
+  mutate(enroll = as.numeric(max) - as.numeric(avail)) |> 
+  separate(number, c("dept", "number", "section"))
+  
+head(courses_clean)
+```
+
+
+
+### Exercise 3: Courses offered by department {.unnumbered}
+
+```{r}
+# Identify the 6 departments that offered the most sections
+courses_clean |> 
+  count(dept) |> 
+  arrange(desc(n)) |> 
+  head()
+
+# Identify the 6 departments with the longest average course titles
+courses_clean |> 
+  mutate(length = str_length(name)) |> 
+  group_by(dept) |> 
+  summarize(avg_length = mean(length)) |> 
+  arrange(desc(avg_length)) |> 
+  head()
+```
+
+### Exercise 4: STAT courses {.unnumbered}
+
+#### Part a {.unnumbered}
+
+```{r}
+courses_clean |> 
+  filter(str_detect(instructor, "Alicia Johnson")) 
+```
+
+#### Part b {.unnumbered}
+
+```{r}
+stat <- courses_clean |> 
+  filter(dept == "STAT") |> 
+  mutate(name = str_replace(name, "Introduction to ", "")) |>
+  mutate(name = str_replace(name, "Statistical", "Stat")) |> 
+  mutate(start_time = str_sub(time, 1, 5)) |> 
+  select(number, name, start_time, enroll)
+
+stat
+
+dim(stat)
+```
+
+
+
+### Exercise 5: More cleaning {.unnumbered}
+
+```{r}
+enrollments <- courses_clean |> 
+  filter(dept != "PE", dept != "INTD") |> 
+  filter(!(dept == "MUSI" & as.numeric(number) < 100)) |> 
+  filter(!(dept == "THDA" & as.numeric(number) < 100)) |> 
+  filter(!str_detect(section, "L"))
+  
+head(enrollments)
+```
+
+
+
+### Optional extra practice {.unnumbered}
+
+```{r}
+# Make a bar plot showing the number of night courses by day of the week.
+courses_clean |> 
+  filter(str_detect(time, "7:00")) |> 
+  ggplot(aes(x = days)) + 
+    geom_bar()
+```
+
+

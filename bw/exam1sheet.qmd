@@ -4,8 +4,4 @@ format: html
 editor: visual
 ---
 
-![exam1](/Users/sengo/Pictures/Photos Library.photoslibrary/originals/1/1F576DE8-2BF2-4968-AA17-8639B00E002E.png)
-
-
-
-
+![exam1](/Users/sengo/Desktop/exam1.png)

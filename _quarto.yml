@@ -32,6 +32,7 @@ book:
       - bw/bw-quad.qmd
       - bw/bw-spatial.qmd
       - bw/exam1sheet.qmd
+      - bw/exam2sheet.qmd
 
     - part: "In-class Activities"
       chapters: 
@@ -40,6 +41,12 @@ book:
       - ica/ica-multi.qmd
       - ica/ica-spatial.qmd
       - ica/ica-wrangling.qmd
+      - ica/ica-dates.qmd
+      - ica/ica-reshaping.qmd
+      - ica/ica-joining.qmd
+      - ica/ica-factors.qmd
+      - ica/ica-strings.qmd
+      - ica/ica-data_import.qmd
 
 format:
   html:
@@ -56,6 +63,9 @@ format:
     code-tools: true
 
 execute:
+  echo: true
+  warning: false
+  error: false
   cache: false
   freeze: auto
 

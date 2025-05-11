@@ -1,0 +1,298 @@
+---
+title: "ica-joining"
+editor: visual
+---
+
+
+---
+title: "Joining"
+number-sections: true
+execute: 
+  warning: false
+fig-env: 'figure'
+fig-pos: 'h'
+fig-align: center
+code-fold: false
+---
+
+
+### Summary
+
+Filtering joins keep specific observations from the left table based on whether they match an observation in the right table.
+
+-   `semi_join()`\
+    Discards any observations in the left table that *do not* have a match in the right table. If there are multiple matches of right cases to a left case, it keeps just one copy of the left case.
+
+-   `anti_join()`\
+    Discards any observations in the left table that *do* have a match in the right table.
+
+
+## Summary of All Joins
+
+![](https://mac-stat.github.io/images/112/join_summary.png)
+
+
+
+## Exercises
+
+
+### Exercise 1: Where are my keys? {.unnumbered}
+
+#### Part a {.unnumbered}
+
+Define two new datasets, with different students and courses:
+
+```{r}
+library(tidyverse)
+students_2 <- data.frame(
+  student = c("D", "E", "F"),
+  class = c("COMP 101", "BIOL 101", "POLI 101")
+)
+
+# Check it out
+students_2
+
+enrollments_2 <- data.frame(
+  course = c("ART 101", "BIOL 101", "COMP 101"),
+  enrollment = c(18, 20, 19)
+)
+
+# Check it out
+enrollments_2
+```
+
+
+
+#### Part b {.unnumbered}
+
+The problem is that course name, the **key** or variable that links these two datasets, is labeled differently: `class` in the `students_2` data and `course` in the `enrollments_2` data. Thus we have to specify these keys in our code:
+
+```{r}
+students_2 |> 
+  left_join(enrollments_2, join_by(class == course))
+```
+
+
+#### Part c {.unnumbered}
+
+Define another set of fake data which adds grade information:
+
+```{r}
+# Add student grades in each course
+students_3 <- data.frame(
+  student = c("Y", "Y", "Z", "Z"),
+  class = c("COMP 101", "BIOL 101", "POLI 101", "COMP 101"),
+  grade = c("B", "S", "C", "A")
+)
+
+# Check it out
+students_3
+
+# Add average grades in each course
+enrollments_3 <- data.frame(
+  class = c("ART 101", "BIOL 101","COMP 101"),
+  grade = c("B", "A", "A-"),
+  enrollment = c(20, 18, 19)
+)
+
+# Check it out
+enrollments_3
+```
+
+Try doing a `left_join()` to link the students' classes to their enrollment info. Did this work? Try and figure out the culprit by examining the output.
+
+```{r}
+students_3 |> 
+  left_join(enrollments_3)
+```
+
+#### Part d {.unnumbered}
+
+The issue here is that our datasets have *2* column names in common: `class` and `grade`. BUT `grade` is measuring 2 different things here: individual student grades in `students_3` and average student grades in `enrollments_3`. Thus it doesn't make sense to try to join the datasets with respect to this variable. We can again solve this by specifying that we want to join the datasets using the `class` variable as a *key*. What are `grade.x` and `grade.y`?
+
+```{r}
+students_3 |> 
+  left_join(enrollments_3, join_by(class == class))
+```
+
+
+
+### Exercise 2: More small practice {.unnumbered}
+
+```{r}
+
+# People who have voted
+voters <- data.frame(
+  id = c("A", "D", "E", "F", "G"),
+  times_voted = c(2, 4, 17, 6, 20)
+)
+
+voters
+
+# Contact info for voting age adults
+contact <- data.frame(
+  name = c("A", "B", "C", "D"),
+  address = c("summit", "grand", "snelling", "fairview"),
+  age = c(24, 89, 43, 38)
+)
+
+contact
+
+# 1. We want contact info for people who HAVEN'T voted
+contact |> 
+  anti_join(voters, join_by(name == id))
+
+# 2. We want contact info for people who HAVE voted
+contact |> 
+  semi_join(voters, join_by(name == id))
+
+# 3. We want any data available on each person
+contact |> 
+  full_join(voters, join_by(name == id))
+voters |> 
+  full_join(contact, join_by(id == name))
+
+# 4. We want to add contact info, when possible, to the voting roster
+voters |> 
+  left_join(contact, join_by(id == name))
+```
+
+
+### Exercise 3: Bigger datasets {.unnumbered}
+
+```{r}
+# Get rid of some duplicate rows!
+grades <- read.csv("https://mac-stat.github.io/data/grades.csv") |> 
+  distinct(sid, sessionID, .keep_all = TRUE)
+head(grades)
+
+# How many observations (rows) and variables (columns) are there in the grades data?
+dim(grades)
+
+```
+
+
+### Exercise 4: Class size {.unnumbered}
+
+#### Part a {.unnumbered}
+
+```{r}
+#courses_combined <- courses |>
+#  group_by(sessionID) |>
+#  summarize(enroll = sum(enroll))
+
+# Check that this has 1695 rows and 2 columns
+#dim(courses_combined)
+```
+
+#### Part b {.unnumbered}
+
+```{r eval = FALSE}
+#courses_combined |> 
+#  summarize(median(enroll))
+```
+
+#### Part c {.unnumbered}
+
+```{r eval = FALSE}
+#student_class_size <- grades |> 
+#  left_join(courses_combined) |> 
+#  group_by(sid) |> 
+#  summarize(med_class = median(enroll))
+
+#head(student_class_size)
+```
+
+#### Part d {.unnumbered}
+
+```{r eval = FALSE}
+#ggplot(student_class_size, aes(x = med_class)) +
+#  geom_histogram(color = "white")
+```
+
+
+### Exercise 5: Narrowing in on classes {.unnumbered}
+
+#### Part a {.unnumbered}
+
+```{r eval = FALSE}
+grades |> 
+  filter(sessionID == "session1986")
+```
+
+#### Part b {.unnumbered}
+
+```{r eval = FALSE}
+#grades |> 
+#  semi_join(dept_E)
+```
+
+
+### Exercise 6: All the wrangling {.unnumbered}
+
+#### Part a {.unnumbered}
+
+```{r eval = FALSE}
+#courses |> 
+#  group_by(dept) |> 
+#  summarize(total = sum(enroll)) |> 
+#  arrange(desc(total))
+```
+
+#### Part b {.unnumbered}
+
+```{r eval = FALSE}
+#grades |> 
+#  left_join(gpa_conversion) |> 
+#  group_by(sid) |> 
+#  summarize(mean(gp, na.rm = TRUE))
+```
+
+#### Part c {.unnumbered}
+
+```{r eval = FALSE}
+# grades |> 
+#   left_join(gpa_conversion) |> 
+#   group_by(sid) |> 
+#   summarize(gpa = mean(gp, na.rm = TRUE)) |> 
+#   summarize(median(gpa))
+```
+
+#### Part d {.unnumbered}
+
+```{r eval = FALSE}
+# There are lots of approaches here!
+# grades |> 
+#   left_join(gpa_conversion) |> 
+#   mutate(below_b_plus = (gp < 3.3)) |> 
+#   summarize(mean(below_b_plus, na.rm = TRUE))
+```
+
+#### Part e {.unnumbered}
+
+```{r eval = FALSE}
+# grades |> 
+#   left_join(gpa_conversion) |> 
+#   left_join(courses) |> 
+#   group_by(iid) |> 
+#   summarize(gpa = mean(gp, na.rm = TRUE)) |> 
+#   arrange(gpa)
+```
+
+#### Part f {.unnumbered}
+
+```{r eval = FALSE}
+# cross_listed <- courses |> 
+#   count(sessionID) |> 
+#   filter(n > 1)
+# 
+# grades |> 
+#   anti_join(cross_listed) |> 
+#   inner_join(courses) |> 
+#   left_join(gpa_conversion) |> 
+#   group_by(dept) |> 
+#   summarize(gpa = mean(gp, na.rm = TRUE)) |> 
+#   arrange(gpa)
+```
+
+

@@ -1,0 +1,223 @@
+---
+title: "ica-data_import"
+editor: visual
+---
+
+
+---
+title: "Data Import"
+number-sections: true
+execute: 
+  warning: false
+fig-env: 'figure'
+fig-pos: 'h'
+fig-align: center
+code-fold: false
+---
+
+
+
+
+
+## Exercises
+
+
+Suppose our goal is to work with data on movie reviews, and that we've already gone through the work to find a dataset. The `imdb_5000_messy.csv` file is posted on Moodle. Let's work with it!
+
+
+### Exercise 1: Save Data Locally {.unnumbered}
+
+#### Part a {.unnumbered}
+
+On your laptop:
+
+-   Download the "imdb_5000_messy.csv" file from Moodle
+-   Move it to the *data* folder in your portfolio repository
+
+#### Part b {.unnumbered}
+
+Hot tip: After saving your data file, it's important to record appropriate citations and info in either a new qmd (eg: "imdb_5000_messy_README.qmd") or in the qmd where you'll analyze the data. These citations should include:
+
+-   the data *source*, i.e. where you *found* the data
+-   the data *creator*, i.e. who / what group *collected* the original data
+-   possibly a data *codebook*, i.e. descriptions of the data variables
+
+To this end, check out where we originally got our IMDB data:
+
+https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata
+
+After visiting that website, take some quick notes here on the data *source* and *creator*.
+
+
+### Exercise 2: Import Data to RStudio {.unnumbered}
+
+Now that we have a local copy of our data file, let's get it into RStudio! Remember that this process depends on 2 things: the file *type* and *location*. Since our file *type* is a csv, we can import it using `read_csv()`. But we have to supply the file *location* through a file path. To this end, we can either use an **absolute file path** or a **relative file path**.
+
+#### Part a {.unnumbered}
+
+An absolute file path describes the location of a file starting from the root or home directory. How we refer to the user root directory depends upon your machine:
+
+-   On a Mac: `~`
+-   On Windows: typically `C:\`
+
+Then the complete file path to the IMDB data file in the data folder, depending on your machine an where you created your portfolio project, can be:
+
+-   On a Mac: `~/Desktop/portfolio/data/imdb_5000_messy.csv`
+-   On Windows: `C:\Desktop\portfolio\data\imdb_5000_messy.csv` or `C:\\Desktop\\portfolio\\data\\imdb_5000_messy.csv`
+
+Putting this together, use `read_csv()` with the appropriate absolute file path to import your data into RStudio. Save this as `imdb_messy`.
+
+
+### Exercise 3: Check Data {.unnumbered}
+
+```{r}
+
+library(tidyverse)
+ imdb_messy <- read_csv("~/Desktop/imdb_5000_messy.csv")
+
+imdb_messy |>
+  mutate(across(where(is.character), as.factor)) |>  # convert characters to factors in order to summarize
+  summary()
+```
+
+
+
+#### Part b {.unnumbered}
+
+There are many NA's, the `color` variable is goofy...
+
+```{r}
+imdb_messy |>
+  mutate(across(where(is.character), as.factor)) |>  # convert characters to factors in order to summarize
+  summary()
+```
+
+
+
+### Exercise 4: Clean Data: Factor Variables 1 {.unnumbered}
+
+```{r}
+imdb_messy |> 
+  count(color)
+```
+
+
+
+### Exercise 5: Clean Data: Factor Variables 2 {.unnumbered}
+
+#### Part a {.unnumbered}
+
+That wouldn't be **reproducible**. It's important to log all steps in our data cleaning, so that we and others know and could reproduce those steps.
+
+#### Part b {.unnumbered}
+
+```{r}
+imdb_temp <- imdb_messy |> 
+  mutate(color = fct_recode(color,
+                            "Color" = "COLOR",
+                            "Color" = "color",
+                            "Black_White" = "B&W",
+                            "Black_White" = "Black and White"))
+
+imdb_temp |> 
+  count(color)
+```
+
+#### Part c {.unnumbered}
+
+```{r}
+imdb_temp <- imdb_messy |> 
+  mutate(color = str_replace(color, "COLOR", "Color"),
+         color = str_replace(color, "color", "Color"),
+         color = str_replace(color, "B&W", "Black_White"),
+         color = str_replace(color, "Black and White", "Black_White"))
+
+imdb_temp |> 
+  count(color)
+```
+
+
+
+### Exercise 6: Clean Data: Missing Data 1 {.unnumbered}
+
+#### Part a {.unnumbered}
+
+```{r}
+# Count the total number of rows in imdb_messy
+nrow(imdb_messy)
+
+# Then count the number of NAs in each column
+colSums(is.na(imdb_messy))
+```
+
+#### Part c {.unnumbered}
+
+These are all documentaries that don't have any actors.
+
+```{r}
+imdb_messy |> 
+  filter(is.na(actor_1_facebook_likes))
+```
+
+
+
+### Exercise 7: Clean: Missing Data 2 {.unnumbered}
+
+#### Part a {.unnumbered}
+
+```{r}
+imdb_messy |> 
+  summarize(mean(duration, na.rm = TRUE))
+```
+
+Follow-up:
+
+We just remove the NAs from the calculation. No need to entirely remove the related movies from the dataset.
+
+#### Part b {.unnumbered}
+
+This gets rid of any movie with any NAs. There are only 3756 movies left! This approach is heavy-handed. It's typically only a good idea when we need complete info on every variable for every part of our analysis.
+
+```{r}
+imdb_temp <- drop_na(imdb_messy)
+nrow(imdb_temp)
+colSums(is.na(imdb_temp))
+```
+
+#### Part c {.unnumbered}
+
+```{r}
+ggplot(imdb_messy, aes(x = duration, fill = color)) +
+  geom_density()
+```
+
+We keep most of the movies!
+
+```{r}
+# Approach 1
+imdb_temp <- imdb_messy |> 
+  select(duration, color) |> 
+  drop_na()
+dim(imdb_temp)
+
+# Approach 2
+imdb_temp <- imdb_messy |> 
+  filter(!is.na(duration), !is.na(color))
+dim(imdb_temp)
+
+# Plot
+ggplot(imdb_temp, aes(x = duration, fill = color)) +
+  geom_density()
+```
+
+#### Part d {.unnumbered}
+
+```{r}
+imdb_temp <- imdb_messy |> 
+  mutate(actor_1_facebook_likes =
+         replace_na(actor_1_facebook_likes, 0))
+
+imdb_temp |> 
+  summarize(sum(is.na(actor_1_facebook_likes)))
+```
+

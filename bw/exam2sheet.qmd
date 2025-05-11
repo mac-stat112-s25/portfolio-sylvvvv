@@ -1,0 +1,9 @@
+---
+title: "exam2sheet"
+editor: visual
+---
+
+![exam1](/Users/sengo/Desktop/exam2.png)
+
+
+
