@@ -4,7 +4,7 @@ project:
 
 book:
   title: "COMP/STAT112 Notebook"
-  author: "Your Name Here"
+  author: "Sylvie_L"
   date: today
   reader-mode: true
   page-navigation: true
@@ -13,7 +13,7 @@ book:
   
   
   sidebar:
-    title: "Your Name Here"
+    title: "Sylvie_Liu"
     collapse-level: 2
     style: "docked"
     pinned: true
@@ -22,6 +22,7 @@ book:
   
   chapters:
     - index.qmd
+    - solo_project
 
     - part: "Best Work"
       chapters: 
