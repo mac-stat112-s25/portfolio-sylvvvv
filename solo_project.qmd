@@ -5,3 +5,97 @@ editor: visual
 ---
 
 
+```{r}
+library(tidyverse)
+library(dplyr)
+student_depression <- read_csv("~/Desktop/student_depression_dataset.csv")
+
+print(student_depression)
+```
+
+```{r}
+
+library(janitor)
+
+student_depression <- student_depression %>%
+  clean_names()
+
+
+# 1. Prevalence of Depression
+ggplot(student_depression, aes(x = depression)) +
+  geom_bar() +
+  labs(title = "Prevalence of Depression Among Students", x = "Depression Status", y = "Count")
+
+# 2. Depression Rates by Gender
+ggplot(student_depression, aes(x = gender, fill = depression)) +
+  geom_bar(position = "fill") +
+  labs(title = "Depression Rates by Gender", x = "Gender", y = "Proportion")
+
+# 3. Impact of Academic Pressure on Depression
+ggplot(student_depression, aes(x = academic_pressure, fill = depression)) +
+  geom_bar(position = "fill") +
+  labs(title = "Impact of Academic Pressure on Depression", x = "Academic Pressure Level", y = "Proportion")
+
+# 4. Sleep Duration and Depression Correlation
+ggplot(student_depression, aes(x = sleep_duration, y = depression)) +
+  geom_boxplot() +
+  labs(title = "Sleep Duration and Depression", x = "Sleep Duration", y = "Depression Status")
+
+# 5. Financial Stress and Depression
+ggplot(student_depression, aes(x = financial_stress, fill = depression)) +
+  geom_bar(position = "fill") +
+  labs(title = "Financial Stress and Depression", x = "Financial Stress Level", y = "Proportion")
+
+# 6. Family History of Mental Illness and Depression
+ggplot(student_depression, aes(x = family_history_of_mental_illness, fill = depression)) +
+  geom_bar(position = "fill") +
+  labs(title = "Family History of Mental Illness and Depression", x = "Family History", y = "Proportion")
+
+# 7. CGPA and Depression Correlation
+ggplot(student_depression, aes(x = cgpa, y = depression)) +
+  geom_point() +
+  labs(title = "CGPA and Depression", x = "CGPA", y = "Depression Status")
+
+
+
+
+```
+
+```{r}
+
+library(broom)
+
+# Fit logistic regression model
+model <- glm(depression ~ gender + academic_pressure + sleep_duration + financial_stress + cgpa + family_history_of_mental_illness,
+             data = student_depression, family = "binomial")
+
+# Get tidy summary and exponentiate estimates for odds ratios
+tidy_model <- tidy(model, exponentiate = TRUE, conf.int = TRUE)
+
+# Plot odds ratios
+ggplot(tidy_model, aes(x = reorder(term, estimate), y = estimate)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.2) +
+  coord_flip() +
+  labs(title = "Odds Ratios for Depression by Predictor",
+       x = "Predictor", y = "Odds Ratio (log scale)") +
+  scale_y_log10()
+
+
+```
+
+```{r}
+
+
+library(interactions)
+
+# Fit logistic regression model with interaction
+model_interact <- glm(depression ~ academic_pressure * gender, data = student_depression, family = "binomial")
+
+# Interaction plot
+interact_plot(model_interact, pred = academic_pressure, modx = gender,
+              plot.points = TRUE, interval = TRUE) +
+  labs(title = "Interaction Between Academic Pressure and Gender on Depression")
+
+
+```

@@ -23,7 +23,6 @@ book:
   chapters:
     - index.qmd
     - solo_project.qmd
-    - exam1sheet.qmd
 
     - part: "Best Work"
       chapters: 
@@ -32,6 +31,7 @@ book:
       - bw/bw-tri.qmd
       - bw/bw-quad.qmd
       - bw/bw-spatial.qmd
+      - bw/exam1sheet.qmd
 
     - part: "In-class Activities"
       chapters: 
