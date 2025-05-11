@@ -3,3 +3,58 @@ title: "Spatial Viz"
 ---
 
 Use this file to generate a professional looking **spatial** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+
+
+```{r}
+# Import starbucks location data
+starbucks <- read.csv("https://mac-stat.github.io/data/starbucks.csv")
+
+library(tidyverse)
+library(openintro)
+library(RColorBrewer)
+library(ggplot2)
+library(leaflet)
+library(dplyr)
+
+starbucks_us_by_state <- starbucks |>
+  filter(Country == "US") |>
+  count(State.Province) |>
+  mutate(state_name = str_to_lower(abbr2state(State.Province)))
+  
+census_pop_est_2018 <- read_csv("https://mac-stat.github.io/data/us_census_2018_state_pop_est.csv") |>
+  separate(state, into = c("dot", "state"), extra = "merge") |>
+  select(-dot) |>
+  mutate(state = str_to_lower(state))
+
+starbucks_with_2018_pop_est <-
+  starbucks_us_by_state |>
+  left_join(census_pop_est_2018,
+    by = c("state_name" = "state")
+  ) |>
+  mutate(starbucks_per_10000 = (n / est_pop_2018) * 10000)
+
+
+#from hw3
+states_map <- map_data("state")
+head(states_map)
+
+
+starbucks_us <- starbucks |>
+  filter(Country == "US")
+
+ggplot(starbucks_with_2018_pop_est, aes(map_id = state_name, fill = starbucks_per_10000)) + 
+  geom_map(map = states_map) +
+  geom_point(
+    data = starbucks_us,
+    aes(x = Longitude, y = Latitude),
+    size = 0.05,
+    alpha = 0.1,
+    inherit.aes = FALSE
+  ) +
+  expand_limits(x = states_map$long, y = states_map$lat) +
+  scale_fill_gradientn(name = "Number of Starbucks", colors = c("orange", "darkblue", "green")) + 
+  labs(
+  title = "Plot of U.S. Starbucks",
+  caption = "Sylvie L."
+  )
+```

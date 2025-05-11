@@ -3,3 +3,21 @@ title: "Quadvariate Viz"
 ---
 
 Use this file to generate a professional looking **quadvariate** visualization.  The visualization will not perfect the first time but you are expected to improve on it throughout the semester especially after covering advanced topics such as effective viz.
+
+
+```{r}
+fbicrime <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-18/agencies.csv")
+
+library(ggplot2)
+
+#from hw3, fbicrime
+ggplot(fbicrime, aes(x = is_nibrs, fill = agency_type)) +
+geom_density(alpha = 0.5) +
+  facet_wrap(~agency_type) +
+  labs(
+  title = "Plot of FBI Agencies' Crime Rate",
+  caption = "Sylvie L."
+  )
+
+
+```
